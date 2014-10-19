@@ -457,8 +457,7 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 
 #+RESULTS:
-: t
-
+: 
 ** projectile
 #+begin_src emacs-lisp
 (sacha/package-install 'projectile)
@@ -629,7 +628,56 @@ redefine =<l= to insert a Lisp block instead.
 #+RESULTS:
 : t
 
+** Web
+#+begin_src emacs-lisp
+(sacha/package-install 'web-mode)
+(use-package web-mode
+:init
+(progn
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(setq web-mode-engines-alist
+      '(("underscorejs"    . "\\.js\\'")
+        ("django"  . "\\.html\\.")))
+
+)
+)
+
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Javascript
+#+begin_src emacs-lisp
+(sacha/package-install 'js2-mode)
+(sacha/package-install 'json-mode)
+(sacha/package-install 'js2-refactor)
+(sacha/package-install 'ac-js2)
+(sacha/package-install 'tern)
+(sacha/package-install 'tern-auto-complete)
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-hook 'js2-mode-hook 'tern-ac-setup)
+(add-hook 'js2-mode-hook 'tern-mode)
+(use-package js2-mode
+:init
+(progn
+
+
+)
+)
+(use-package tern
+:init
+(progn
+(tern-ac-setup)
+(add-hook 'js-mode-hook 'tern-ac-setup 'tern-mode)
+)
+)
+
+#+end_src
+
+#+RESULTS:
+: t
 
 * Misc			  
 
