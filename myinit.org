@@ -443,6 +443,23 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** snippets
+#+begin_src emacs-lisp
+(sacha/package-install 'yasnippet)
+(sacha/package-install 'java-snippets)
+(sacha/package-install 'helm-c-yasnippet)
+(use-package yasnippet
+:init
+(progn
+(setq yas-snippet-dirs "~/.emacs.d/snippets/")
+(yas-global-mode 1)
+)
+)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Flycheck
 #+begin_src emacs-lisp
 (sacha/package-install 'flycheck)
