@@ -353,8 +353,12 @@ redefine =<l= to insert a Lisp block instead.
  org-gcal-client-id gcal-client-id
  org-gcal-client-secret gcal-client-secret
  org-gcal-file-alist '(("zamansky@gmail.com" .  "~/Dropbox/orgfiles/schedule.org")
-)
+)))
 #+end_src
+
+#+RESULTS:
+: t
+
 ** reveal
 #+begin_src emacs-lisp
 (setq org-reveal-mathjax t)
@@ -604,6 +608,22 @@ redefine =<l= to insert a Lisp block instead.
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 ))
+#+end_src
+
+#+RESULTS:
+: t
+
+** Processing
+#+begin_src emacs-lisp
+(sacha/package-install 'processing-mode)
+(sacha/package-install 'processing-snippets)
+(use-package processing-mode
+:init 
+(progn
+(add-to-list 'auto-mode-alist '("\\.pde$" . processing-mode))
+(setq processing-location "/home/zamansky/opt/processing/processing-java")
+)
+)
 #+end_src
 
 #+RESULTS:
