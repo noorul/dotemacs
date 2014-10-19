@@ -449,7 +449,7 @@ redefine =<l= to insert a Lisp block instead.
 (sacha/package-install 'helm-projectile)
 (use-package projectile 
 :init 
-{progn
+(progn
 (projectile-global-mode)
 
 )
