@@ -446,19 +446,17 @@ redefine =<l= to insert a Lisp block instead.
 ** Magit
 #+begin_src emacs-lisp
 (sacha/package-install 'magit)
-(defun sacha/magit-commit-all ()
-  "Publish the current file and commit all the current changes."
-  (interactive)
-  (magit-status default-directory)
-  (magit-stage-all)
-  (call-interactively 'magit-log-edit))
 
 (use-package magit
   :init (setq magit-diff-options '("-b")) ; ignore whitespace
   :bind (("C-x v d" . magit-status) 
-         ("C-x v p" . magit-push) 
-         ("C-x v c" . sacha/magit-commit-all)))
+         ("C-x v p" . magit-push)) 
+         )
 #+end_src
+
+#+RESULTS:
+: t
+
 ** projectile
 #+begin_src emacs-lisp
 (sacha/package-install 'projectile)
