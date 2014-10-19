@@ -1,0 +1,596 @@
+#+TITLE: Mike Zamansky's Emacs configuration
+#+OPTIONS: toc:4 h:4
+* Notes
+** Checkout
+   - helm-swoop
+* Basic Configuration
+** Personal info
+#+begin_src emacs-lisp
+  (setq user-full-name "Mike Zamansky"
+        user-mail-address "zamansky@gmail.com")
+#+end_src
+** Install Package routine
+#+begin_src emacs-lisp
+(defun sacha/package-install (package &optional repository)
+  "Install PACKAGE if it has not yet been installed.
+If REPOSITORY is specified, use that."
+  (unless (package-installed-p package)
+    (let ((package-archives (if repository
+                                (list (assoc repository package-archives))
+                              package-archives)))
+    (package-install package))))
+(sacha/package-install 'use-package)
+(require 'use-package)
+#+end_src
+** General Configuration
+*** Misc interface settings
+#+begin_src emacs-lisp
+(global-auto-revert-mode 1)
+(setq auto-revert-verbose nil)
+(global-set-key (kbd "<f5>") 'revert-buffer)
+(tool-bar-mode -1)
+
+(sacha/package-install 'hungry-delete)
+(require 'hungry-delete)
+
+#+end_src
+
+#+RESULTS:
+: hungry-delete
+
+*** Helm
+#+begin_src emacs-lisp
+(sacha/package-install 'helm)
+(sacha/package-install 'helm-swoop)
+      (use-package helm
+        :init
+        (progn 
+          (require 'helm-config) 
+          (require 'helm-eshell)
+          (require 'helm-files)
+          (require 'helm-grep)
+  (setq helm-candidate-number-limit 10)
+          ;; From https://gist.github.com/antifuchs/9238468
+          (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+                helm-input-idle-delay 0.01  ; this actually updates things
+                                              ; reeeelatively quickly.
+                helm-quick-update t
+                helm-M-x-requires-pattern nil
+                helm-ff-skip-boring-files t)
+  (helm-mode))
+  :config
+  (progn
+      ;; I don't like the way switch-to-buffer uses history, since
+      ;; that confuses me when it comes to buffers I've already
+      ;; killed. Let's use ido instead.
+      (add-to-list 'helm-completing-read-handlers-alist '(switch-to-buffer . ido)))
+    :bind (("C-c h" . helm-mini)))
+  (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
+
+
+#+end_src
+
+*** Mode line format
+
+Display a more compact mode line
+
+#+begin_src emacs-lisp
+(use-package smart-mode-line
+  :init
+  (progn
+  (setq-default
+   mode-line-format 
+   '("%e"
+     mode-line-front-space
+     mode-line-mule-info
+     mode-line-client
+     mode-line-modified
+     mode-line-remote
+     mode-line-frame-identification
+     mode-line-buffer-identification
+     "   "
+     mode-line-position
+     (vc-mode vc-mode)
+     "  "
+     mode-line-modes
+     mode-line-misc-info
+     mode-line-end-spaces))))
+#+end_src
+
+#+RESULTS:
+: Could not load package smart-mode-line
+
+Hide minor modes I care less about:
+
+#+begin_src emacs-lisp
+(require 'diminish)
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "guide-key" '(diminish 'guide-key-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "guide-key" '(diminish 'guide-key-mode))
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
+(diminish 'visual-line-mode)
+#+end_src
+
+
+#+RESULTS:
+|
+
+*** Change "yes or no" to "y or n"
+
+Lazy people like me never want to type "yes" when "y" will suffice.
+
+#+begin_src emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)   
+#+end_src
+
+*** Theme
+#+BEGIN_SRC emacs-lisp
+(set-background-color "Oldlace")
+(setq default-frame-alist
+     '((background-color . "Oldlace")
+        ))
+#+END_SRC
+*** Undo tree mode - visualize your undos and branches
+
+People often struggle with the Emacs undo model, where there's really no concept of "redo" - you simply undo the undo. 
+# 
+This lets you use =C-x u= (=undo-tree-visualize=) to visually walk through the changes you've made, undo back to a certain point (or redo), and go down different branches.
+
+#+begin_src emacs-lisp
+(sacha/package-install 'undo-tree)
+  (use-package undo-tree
+    :init
+    (progn
+      (global-undo-tree-mode)
+      (setq undo-tree-visualizer-timestamps t)
+      (setq undo-tree-visualizer-diff t)))
+#+end_src
+
+#+RESULTS:
+: t
+
+*** Help - guide-key
+
+It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
+
+#+begin_src emacs-lisp
+(use-package guide-key
+  :init
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (guide-key-mode 1))  ; Enable guide-key-mode
+#+end_src
+
+*** UTF-8
+
+From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
+#+begin_src emacs-lisp
+(prefer-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+end_src
+
+* Navigation
+** Pop to mark
+
+Handy way of getting back to previous places.
+
+#+begin_src emacs-lisp
+(bind-key "C-x p" 'pop-to-mark-command)
+(setq set-mark-command-repeat-pop t)
+#+end_src
+
+** Ace-jump
+#+BEGIN_SRC emacs-lisp
+(sacha/package-install 'ace-jump-mode)
+#+END_SRC
+** Ace-windows
+#+BEGIN_SRC emacs-lisp
+(sacha/package-install 'ace-window)
+(global-set-key [remap other-window] 'ace-window)
+#+END_SRC
+
+** Browse-kill-ring - see what you've cut so that you can paste it       
+Make sense of the kill ring! This lets you list the contents of the
+kill ring and paste a specific item. You can also manipulate your kill
+ring contents.
+
+If you're new to Emacs, you might not yet know about what the kill
+ring is. It stores the items that you cut (or kill, in Emacs terms).
+You're not limited to pasting just the most recent item - you can
+paste the second-to-the-last item you cut, and so on. I remember to
+use =C-y= and =M-y= when going backwards in the kill ring, but I never
+quite remember how to go forward, so browse-kill-ring makes it easier.
+
+#+begin_src emacs-lisp
+  (sacha/package-install 'browse-kill-ring)
+  (use-package browse-kill-ring
+    :init 
+    (progn 
+      (browse-kill-ring-default-keybindings) ;; M-y
+      (setq browse-kill-ring-quit-action 'save-and-restore)))      
+#+end_src
+
+#+RESULTS:
+: t
+
+** Multiple cursors mode 
+I often define keyboard macros to process multiple lines in a region.
+Maybe =multiple-cursors= will be an even better way. Looks promising!
+[[http://emacsrocks.com/e13.html][See Emacs Rocks episode 13 (multiple-cursors) for a great demo]].
+
+#+begin_src emacs-lisp
+(sacha/package-install 'multiple-cursors)
+  (use-package multiple-cursors
+    :bind 
+     (("C->" . mc/mark-next-like-this)
+      ("C-<" . mc/mark-previous-like-this)
+      ("C-*" . mc/mark-all-like-this)))
+#+end_src
+
+Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen.org/][Planet Emacsen]] for the link!
+
+** All				
+* Org
+** Variabnles
+#+BEGIN_SRC emacs-lisp
+(custom-set-variables
+ '(org-directory "~/Dropbox/orgfiles")
+ '(org-agenda-files (quote ("~/Dropbox/orgfiles/")))
+ '(org-default-notes-file (concat org-directory "/notes.org"))
+ '(org-hide-leading-stars t)
+ '(org-startup-folded (quote content))
+ '(org-startup-indented t)
+ '(org-export-html-postamble nil)
+ )
+#+END_SRC   
+
+#+RESULTS:
+
+ 
+** Agenda
+** Starting my weeks on Monday
+
+I like looking at weekends as [[http://sachachua.com/blog/2010/11/week-beginnings/][week beginnings]] instead, so I want the
+Org agenda to start on Saturdays.
+
+6 was Saturday so maybe play with this - MZ
+#+begin_src emacs-lisp
+(setq org-agenda-start-on-weekday 1)
+#+end_src
+
+** Structure templates
+
+Org makes it easy to insert blocks by typing =<s[TAB]=, etc.
+I hardly ever use LaTeX, but I insert a lot of Emacs Lisp blocks, so I
+redefine =<l= to insert a Lisp block instead.
+
+#+begin_src emacs-lisp
+  (setq org-structure-template-alist 
+        '(("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>")
+          ("e" "#+begin_example\n?\n#+end_example" "<example>\n?\n</example>")
+          ("q" "#+begin_quote\n?\n#+end_quote" "<quote>\n?\n</quote>")
+          ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE" "<verse>\n?\n</verse>")
+          ("c" "#+BEGIN_COMMENT\n?\n#+END_COMMENT")
+          ("p" "#+BEGIN_PRACTICE\n?\n#+END_PRACTICE")
+          ("l" "#+begin_src emacs-lisp\n?\n#+end_src" "<src lang=\"emacs-lisp\">\n?\n</src>")
+          ("L" "#+latex: " "<literal style=\"latex\">?</literal>")
+          ("h" "#+begin_html\n?\n#+end_html" "<literal style=\"html\">\n?\n</literal>")
+          ("H" "#+html: " "<literal style=\"html\">?</literal>")
+          ("a" "#+begin_ascii\n?\n#+end_ascii")
+          ("A" "#+ascii: ")
+          ("i" "#+index: ?" "#+index: ?")
+          ("I" "#+include %file ?" "<include file=%file markup=\"?\">")))
+#+end_src
+** Babel
+#+begin_src emacs-lisp
+(sacha/package-install 'ob-mongo)
+(use-package ob-mongo
+  :init
+(progn
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (emacs-lisp . t)
+   (scheme . t )
+   (java . t )
+   (mongo . t )
+   (ditaa . t)
+   (dot . t)
+   (org . t)
+   (gnuplot . t )
+   (sh . t )
+   (haskell . t )
+   (latex . t )
+   ))))
+#+end_src
+** Publish
+#+begin_src emacs-lisp
+(setq org-publish-project-alist
+      '(
+           ("blog-posts"
+		:base-directory "~/gh/cestlaz.github.io/_org/"
+      		:base-extension "org"
+		:publishing-directory "~/gh/cestlaz.github.io/_drafts/"
+		:recursive nil		      
+;      		:publishing-function org-publish-org-to-html
+      		:publishing-function org-html-publish-to-html
+      		:headline-levels 4
+		:auto-index nil
+		:htmlized-source t
+		:section-numbers nil
+		:toc nil
+      		:auto-preamble nil
+		:table-of-contents nil
+		:html-extension "html"		
+		:body-only t
+      		)
+           ("apcs-hw"
+		:base-directory "~/gh/stuycs-apcs-z.github.io/_org/"
+      		:base-extension "org"
+		:publishing-directory "~/gh/stuycs-apcs-z.github.io/_posts/"
+		:recursive nil		      
+;      		:publishing-function org-publish-org-to-html
+      		:publishing-function org-html-publish-to-html
+      		:headline-levels 4
+		:auto-index nil
+		:section-numbers nil
+		:toc nil
+      		:auto-preamble nil
+		:table-of-contents nil
+		:html-extension "html"		
+		:body-only t
+      		))
+
+      )
+#+end_src
+** gcal
+#+begin_src emacs-lisp
+(sacha/package-install 'org-gcal)
+(use-package org-gcal
+  :init
+(setq 
+ org-gcal-client-id gcal-client-id
+ org-gcal-client-secret gcal-client-secret
+ org-gcal-file-alist '(("zamansky@gmail.com" .  "~/Dropbox/orgfiles/schedule.org")
+                       ("zamansky@gmail.com" .  "~/Dropbox/orgfiles/task.org")))
+)
+#+end_src
+** reveal
+#+begin_src emacs-lisp
+(setq org-reveal-mathjax t)
+(sacha/package-install 'ox-reveal)
+#+end_src
+
+** Bindings
+#+BEGIN_SRC emacs-lisp
+(defun show-todo-list ()
+"show-todo-list"
+(interactive)
+(switch-to-buffer (find-file-noselect "~/Dropbox/orgfiles/index.org"
+ nil nil nil)))
+(global-set-key [f1] 'show-todo-list)
+
+; org capture commant:  emacsclient -c -e "(org-capture)"     
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+#+END_SRC
+
+#+RESULTS:
+: org-iswitchb
+
+* Mu4e
+#+begin_src emacs-lisp
+
+(use-package mu4e
+:init
+(progn
+(setq mu4e-get-mail-command "offlineimap"   ;; or fetchmail, or ...
+      mu4e-update-interval 300)             ;; update every 5 minutes
+
+(setq mu4e-user-mail-address-list '("zamansky@cstuy.org"))
+
+ ;; something about ourselves
+(setq
+ user-mail-address "zamansky@cstuy.org"
+ user-full-name  "Mike Zamansky"
+ mu4e-compose-signature
+ (concat
+  "Mike Zamansky\n"
+  "http://cstuy.org\n"))
+
+ ;; enable inline images
+(setq mu4e-view-show-images t)
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+;; convert org mode to HTML automatically
+(setq org-mu4e-convert-to-html t)
+(require 'smtpmail)
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-stream-type 'starttls
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587)
+(setq message-kill-buffer-on-exit t)
+;;; message view action
+(add-to-list 'mu4e-view-actions
+	     '("View in browser" . mu4e-msgv-action-view-in-browser) t)
+
+
+(defun mu4e-msgv-action-view-in-browser (msg)
+  "View the body of the message in a web browser."
+  (interactive)
+  (let ((html (mu4e-msg-field (mu4e-message-at-point t) :body-html))
+	(tmpfile (format "%s/%d.html" temporary-file-directory (random))))
+    (unless html (error "No html part for this message"))
+    (with-temp-file tmpfile
+      (insert
+       "<html>"
+       "<head><meta http-equiv=\"content-type\""
+       "content=\"text/html;charset=UTF-8\">"
+       html))
+    (browse-url (concat "file://" tmpfile))))
+
+)
+)
+#+end_src
+
+#+RESULTS:
+: Could not load package Mu4e
+
+* Programming
+** Flycheck
+#+begin_src emacs-lisp
+(sacha/package-install 'flycheck)
+(use-package flycheck 
+:init
+(global-flycheck-mode t))
+#+end_src
+** Smartparens
+#+begin_src emacs-lisp
+(sacha/package-install 'smartparens)
+(use-package smartparens 
+:init
+(progn
+(require 'smartparens-config)
+(smartparens-global-mode t)
+
+;; highlights matching pairs
+(show-smartparens-global-mode t)
+
+(define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+(define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+
+(define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
+(define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
+(define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+(define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+
+(define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
+(define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+(define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
+(define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
+
+(define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
+(define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
+
+(define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
+(define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
+
+(define-key sp-keymap (kbd "M-<delete>") 'sp-unwrap-sexp)
+(define-key sp-keymap (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+
+(define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+(define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+(define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+(define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+
+(define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
+(define-key sp-keymap (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
+(define-key sp-keymap (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
+(define-key sp-keymap (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
+
+(define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
+(define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+(define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
+
+(define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
+(define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
+
+(define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
+(define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
+(define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
+(define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
+(define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
+(define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
+(define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
+(define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
+(define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
+
+;;;;;;;;;;;;;;;;;;
+;; pair management
+
+(sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
+
+
+)
+
+)
+
+#+end_src
+
+#+RESULTS:
+: t
+
+** Autocomplete
+#+begin_src emacs-lisp
+(sacha/package-install 'auto-complete)
+(use-package auto-complete
+:init
+(progn
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-sources '(
+		   ac-source-symbols
+		   ac-source-words-in-same-mode-buffers
+		   ac-source-functions
+		   ac-source-variables
+		   ac-source-dictionary
+		   ac-source-filename
+		   ac-source-yasnippet
+		   )) 
+ 
+(setq ac-auto-show-menu 0)
+(auto-complete-mode t)
+
+))
+#+end_src
+
+#+RESULTS:
+: t
+
+** Python
+#+begin_src emacs-lisp
+
+(sacha/package-install 'jedi)
+(use-package jedi
+:init
+(progn
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+))
+#+end_src
+
+#+RESULTS:
+: t
+
+** Javascript
+
+* Misc			  
+
+M-x all lets you edit all lines matching a given regexp.
+
+#+begin_src emacs-lisp
+(sacha/package-install 'all)
+(use-package all)
+#+end_src
+
+** Enable minibuffer completion
+[2013-03-31] Superseded by ido-hacks?
+
+It can be difficult to remember the full names of Emacs commands, so I
+use =icomplete-mode= for minibuffer completion. This also makes it
+easier to discover commands.
+
+#+begin_src emacs-lisp :eval no :tangle no
+(icomplete-mode 1)
+#+end_src
+
+
+
+
+
