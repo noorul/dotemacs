@@ -233,7 +233,7 @@ Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen
 
 ** All				
 * Org
-** Variabnles
+** Variables
 #+BEGIN_SRC emacs-lisp
 (custom-set-variables
  '(org-directory "~/Dropbox/orgfiles")
@@ -248,7 +248,6 @@ Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen
 
 #+RESULTS:
 
- 
 ** Agenda
 ** Starting my weeks on Monday
 
@@ -354,7 +353,6 @@ redefine =<l= to insert a Lisp block instead.
  org-gcal-client-id gcal-client-id
  org-gcal-client-secret gcal-client-secret
  org-gcal-file-alist '(("zamansky@gmail.com" .  "~/Dropbox/orgfiles/schedule.org")
-                       ("zamansky@gmail.com" .  "~/Dropbox/orgfiles/task.org")))
 )
 #+end_src
 ** reveal
