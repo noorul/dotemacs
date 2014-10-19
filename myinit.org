@@ -32,7 +32,7 @@ If REPOSITORY is specified, use that."
 
 (sacha/package-install 'hungry-delete)
 (require 'hungry-delete)
-
+(winner-mode t)
 #+end_src
 
 #+RESULTS:
@@ -443,6 +443,18 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** projectile
+#+begin_src emacs-lisp
+(sacha/package-install 'projectile)
+(sacha/package-install 'helm-projectile)
+(use-package projectile 
+:init 
+{progn
+(projectile-global-mode)
+
+)
+)
+#+end_src
 ** snippets
 #+begin_src emacs-lisp
 (sacha/package-install 'yasnippet)
