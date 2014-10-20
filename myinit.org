@@ -503,6 +503,7 @@ redefine =<l= to insert a Lisp block instead.
 ** Flycheck
 #+begin_src emacs-lisp
 (sacha/package-install 'flycheck)
+(sacha/package-install 'flycheck-pyflakes)
 (use-package flycheck 
 :init
 (global-flycheck-mode t))
