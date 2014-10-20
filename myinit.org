@@ -231,8 +231,15 @@ Maybe =multiple-cursors= will be an even better way. Looks promising!
 
 Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen.org/][Planet Emacsen]] for the link!
 
+** Expand
+#+begin_src emacs-lisp
+(sacha/package-install 'expand-region)
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+#+end_src
 ** All				
 * Org
+
 ** Variables
 #+BEGIN_SRC emacs-lisp
 (custom-set-variables
