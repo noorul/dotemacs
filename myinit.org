@@ -452,6 +452,12 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** Rainbow delimiters
+#+begin_src emacs-lisp
+(sacha/package-install 'rainbow-delimiters)
+(use-package rainbow-delimiters
+  :init (rainbow-delimiters-mode))
+#+end_src
 ** Magit
 #+begin_src emacs-lisp
 (sacha/package-install 'magit)
