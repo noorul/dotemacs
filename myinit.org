@@ -469,8 +469,9 @@ redefine =<l= to insert a Lisp block instead.
          )
 #+end_src
 
-#+RESULTS:
-: 
+** gist
+(sacha/package-install 'gist)
+(use-package gist)
 ** projectile
 #+begin_src emacs-lisp
 (sacha/package-install 'projectile)
