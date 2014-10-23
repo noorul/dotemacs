@@ -237,7 +237,15 @@ Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 #+end_src
-** All				
+** All
+
+M-x all lets you edit all lines matching a given regexp.
+
+#+begin_src emacs-lisp
+(sacha/package-install 'all)
+(use-package all)
+#+end_src
+				
 * Org
 
 ** Variables
@@ -697,13 +705,6 @@ redefine =<l= to insert a Lisp block instead.
 : t
 
 * Misc			  
-
-M-x all lets you edit all lines matching a given regexp.
-
-#+begin_src emacs-lisp
-(sacha/package-install 'all)
-(use-package all)
-#+end_src
 
 ** Enable minibuffer completion
 [2013-03-31] Superseded by ido-hacks?
