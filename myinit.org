@@ -463,6 +463,16 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** Aggresive init
+#+begin_src emacs-lisp
+(sacha/package-install 'aggressive-indent)
+(use-package aggresive-indent
+:init (progn
+  (global-aggresive-indent-mode)
+)
+)
+
+#+end_src
 ** Rainbow delimiters
 #+begin_src emacs-lisp
 (sacha/package-install 'rainbow-delimiters)
