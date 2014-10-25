@@ -724,3 +724,14 @@ easier to discover commands.
 
 
 
+** edit-server for edit with emacs
+#+begin_src emacs-lisp
+(sacha/package-install 'edit-server)
+(use-package edit-server
+  :init (edit-server-start)
+)
+#+end_src
+
+#+RESULTS:
+: t
+
