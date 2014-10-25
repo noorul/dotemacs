@@ -70,6 +70,20 @@ If REPOSITORY is specified, use that."
 
 #+end_src
 
+
+
+*** Help - guide-key
+
+It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
+
+#+begin_src emacs-lisp
+(sacha/package-install 'guide-key)
+(use-package guide-key
+  :init
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (guide-key-mode 1))  ; Enable guide-key-mode
+#+end_src
+
 *** Mode line format
 
 Display a more compact mode line
@@ -150,17 +164,6 @@ This lets you use =C-x u= (=undo-tree-visualize=) to visually walk through the c
 
 #+RESULTS:
 : t
-
-*** Help - guide-key
-
-It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
-
-#+begin_src emacs-lisp
-(use-package guide-key
-  :init
-  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
-  (guide-key-mode 1))  ; Enable guide-key-mode
-#+end_src
 
 *** UTF-8
 
@@ -251,8 +254,8 @@ M-x all lets you edit all lines matching a given regexp.
 ** Variables
 #+BEGIN_SRC emacs-lisp
 (custom-set-variables
- '(org-directory "~/Dropbox/orgfiles")
- '(org-agenda-files (quote ("~/Dropbox/orgfiles/")))
+ '(org-directory "~/btsync/orgfiles")
+ '(org-agenda-files (quote ("~/btsyn/orgfiles/")))
  '(org-default-notes-file (concat org-directory "/notes.org"))
  '(org-hide-leading-stars t)
  '(org-startup-folded (quote content))
@@ -367,7 +370,7 @@ redefine =<l= to insert a Lisp block instead.
 (setq 
  org-gcal-client-id gcal-client-id
  org-gcal-client-secret gcal-client-secret
- org-gcal-file-alist '(("zamansky@gmail.com" .  "~/Dropbox/orgfiles/schedule.org")
+ org-gcal-file-alist '(("zamansky@gmail.com" .  "~/btsync/orgfiles/schedule.org")
 )))
 #+end_src
 
@@ -385,7 +388,7 @@ redefine =<l= to insert a Lisp block instead.
 (defun show-todo-list ()
 "show-todo-list"
 (interactive)
-(switch-to-buffer (find-file-noselect "~/Dropbox/orgfiles/index.org"
+(switch-to-buffer (find-file-noselect "~/btsync/orgfiles/index.org"
  nil nil nil)))
 (global-set-key [f1] 'show-todo-list)
 
