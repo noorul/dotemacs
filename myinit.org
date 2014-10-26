@@ -10,23 +10,26 @@ Also do this when you change package sources.
    - helm-swoop
 * The init.el
 #+begin_src emacs-lisp :tangle no
-(package-initialize nil)
-(require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-	     '("gnu" . "http://elpa.gnu.org/packages/") t)
+  (package-initialize nil)
+  (require 'package)
 
-;; Override the packages with the git version of Org and other packages
-(package-initialize t)
-(setq package-enable-at-startup nil)
-(require 'org)
-(require 'ob-tangle)
-(load "~/.emacs.secrets" t)
-(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+  ;(add-to-list 'package-archives
+  ;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+               '("gnu" . "http://elpa.gnu.org/packages/") t)
 
-(custom-set-variables
- '(inhibit-startup-screen t))
+  ;; Override the packages with the git version of Org and other packages
+  (package-initialize t)
+  (setq package-enable-at-startup nil)
+  (require 'org)
+  (require 'ob-tangle)
+  (load "~/.emacs.secrets" t)
+  (org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+
+  (custom-set-variables
+   '(inhibit-startup-screen t))
 #+end_src
 * Basic Configuration
 ** Personal info
