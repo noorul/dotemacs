@@ -662,7 +662,6 @@ redefine =<l= to insert a Lisp block instead.
 
 #+RESULTS:
 : t
-
 ** Python
 #+begin_src emacs-lisp
 
@@ -745,6 +744,20 @@ redefine =<l= to insert a Lisp block instead.
 #+RESULTS:
 : t
 
+* Key binding
+#+begin_src emacs-lisp
+(global-set-key (kbd "\e\ei")
+		(lambda () (interactive) (find-file "~/btsync/orgfiles/index.org")))
+
+(global-set-key (kbd "\e\ea")
+		(lambda () (interactive) (find-file "~/btsync/orgfiles/apcs.org")))
+
+(global-set-key (kbd "\e\es")
+		(lambda () (interactive) (find-file "~/btsync/orgfiles/softdev.org")))
+(global-set-key (kbd "\e\ec")
+		(lambda () (interactive) (find-file "~/btsync/orgfiles/cstuy.org")))
+
+#+end_src
 * Misc			  
 
 ** Enable minibuffer completion
