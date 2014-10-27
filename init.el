@@ -19,3 +19,4 @@
 
 (custom-set-variables
  '(inhibit-startup-screen t))
+(put 'narrow-to-region 'disabled nil)

@@ -87,13 +87,13 @@ If REPOSITORY is specified, use that."
                 helm-ff-skip-boring-files t)
   (helm-mode))
   :config
-  (progn
+ ; (progn
       ;; I don't like the way switch-to-buffer uses history, since
       ;; that confuses me when it comes to buffers I've already
       ;; killed. Let's use ido instead.
       (add-to-list 'helm-completing-read-handlers-alist '(switch-to-buffer . ido)))
-    :bind (("C-c h" . helm-mini)))
-  (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
+ ;   :bind (("C-c h" . helm-mini)))
+ ; (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
 
 
 #+end_src
