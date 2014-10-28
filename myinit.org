@@ -429,20 +429,24 @@ redefine =<l= to insert a Lisp block instead.
 ** gcal
 #+begin_src emacs-lisp
 
-;; give dummy values in case someone doesn't have
-;; a .emacs.secrets file
-(setq gcal-client-id nil)
-(setq gcal-client-secret nil)
+  ;; give dummy values in case someone doesn't have
+  ;; a .emacs.secrets file
+  (if (not (boundp 'gcal-client-id))
+      (setq gcal-client-id nil))
+
+  (if (not (boundp 'gcal-client-secret))
+      (setq gcal-client-secret nil))
 
 
-(sacha/package-install 'org-gcal)
-(use-package org-gcal
-  :init
-(setq 
- org-gcal-client-id gcal-client-id
- org-gcal-client-secret gcal-client-secret
- org-gcal-file-alist '(("zamansky@gmail.com" .  "~/btsync/orgfiles/schedule.org")
-)))
+
+  (sacha/package-install 'org-gcal)
+  (use-package org-gcal
+    :init
+  (setq 
+   org-gcal-client-id gcal-client-id
+   org-gcal-client-secret gcal-client-secret
+   org-gcal-file-alist '(("zamansky@gmail.com" .  "~/btsync/orgfiles/schedule.org")
+  )))
 #+end_src
 
 #+RESULTS:
