@@ -2,7 +2,7 @@
 
 Here's my emacs configuration. 
 
-Some of the things I use emacs for:
+** Some of the things I use emacs for:
 - Python coding
 - Web development
 - Java and processing (mostly for teaching APC)
@@ -11,6 +11,11 @@ Some of the things I use emacs for:
   - lesson planning
   - blogging 
   - managing my schedules, notes, bookmarks etc.
+** Piecemeal install 
+- make sure you've updated your list of packages with 
+  **M-x package-refresh-contents** and then grab chunks of
+  this configuration and integrate it into your own.
 
 
+** Full install
 
