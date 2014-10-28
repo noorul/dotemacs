@@ -16,6 +16,9 @@ Here's my emacs configuration.
   **M-x package-refresh-contents** and then grab chunks of
   this configuration and integrate it into your own.
 
-
 ** Full install
+- I'm assuming that you have nothing in your .emacs.d directory
+- Remove the .emacs file from your home directory (if you have a .emacs file)
+- clone this and rename the directory .emacs.d
+  git clone https://github.com/zamansky/dotemacs.git .emacs.d
 
