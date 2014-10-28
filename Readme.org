@@ -1,1 +1,16 @@
 * My Emacs configuration
+
+Here's my emacs configuration. 
+
+Some of the things I use emacs for:
+- Python coding
+- Web development
+- Java and processing (mostly for teaching APC)
+- latex
+- All sorts of org-mode stuff
+  - lesson planning
+  - blogging 
+  - managing my schedules, notes, bookmarks etc.
+
+
+
