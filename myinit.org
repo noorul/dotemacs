@@ -54,14 +54,9 @@ this file
 #+end_src
 
 * Basic Configuration
-*** Secrets 
+** Secrets 
 Stuff we don't want on github.
 #+begin_src emacs-lisp
-;; give dummy values in case someone doesn't have
-;; a .emacs.secrets file
-(setq gcal-client-id nil)
-(setq gcal-client-secret nil)
-
 (load "~/.emacs.secrets" t)
 #+end_src
 
@@ -433,6 +428,13 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 ** gcal
 #+begin_src emacs-lisp
+
+;; give dummy values in case someone doesn't have
+;; a .emacs.secrets file
+(setq gcal-client-id nil)
+(setq gcal-client-secret nil)
+
+
 (sacha/package-install 'org-gcal)
 (use-package org-gcal
   :init
