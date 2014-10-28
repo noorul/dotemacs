@@ -1,4 +1,4 @@
-#+TITLE: Mike Zamansky's Emacs configuration
+.#+TITLE: Mike Zamansky's Emacs configuration
 #+STARTUP: overview
 #+OPTIONS: toc:4 h:4
 Use tab on each section to cycle through expanding and hiding sections
@@ -45,7 +45,6 @@ this file
   (setq package-enable-at-startup nil)
   (require 'org)
   (require 'ob-tangle)
-  (load "~/.emacs.secrets" t)
   (org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
 
   (custom-set-variables
@@ -55,6 +54,17 @@ this file
 #+end_src
 
 * Basic Configuration
+*** Secrets 
+Stuff we don't want on github.
+#+begin_src emacs-lisp
+;; give dummy values in case someone doesn't have
+;; a .emacs.secrets file
+(setq gcal-client-id nil)
+(setq gcal-client-secret nil)
+
+(load "~/.emacs.secrets" t)
+#+end_src
+
 ** Personal info
 #+begin_src emacs-lisp
   (setq user-full-name "Mike Zamansky"

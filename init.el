@@ -14,7 +14,6 @@
 (setq package-enable-at-startup nil)
 (require 'org)
 (require 'ob-tangle)
-(load "~/.emacs.secrets" t)
 (org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
 
 (custom-set-variables
