@@ -1,4 +1,5 @@
 #+TITLE: Mike Zamansky's Emacs configuration
+#+STARTUP: content
 #+OPTIONS: toc:4 h:4
 * Notes
 ** First time
@@ -6,9 +7,17 @@ use M-x package-refresh-contents the first time you load this, then
 exit emacs and start again.
 
 Also do this when you change package sources.
-** Checkout
+** Packages I should look into
    - helm-swoop
 * The init.el
+
+The content between the begin_src and end_src should
+be written to a file named init.el in your .emacs.d directory
+the other file you should place there is this file (myinit.org)
+
+It will load when emacs starts and then it will run everything in 
+this file
+
 #+begin_src emacs-lisp :tangle no
   (package-initialize nil)
   (require 'package)
