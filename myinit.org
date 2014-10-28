@@ -2,11 +2,21 @@
 #+STARTUP: content
 #+OPTIONS: toc:4 h:4
 * Notes
+** Thanks
+Most of this file was taken from Sacha Chua's configuration. She's
+shared tons of really awesome emacs stuff and I'd encourage everyone
+to google her and check out her work.
+
 ** First time
 use M-x package-refresh-contents the first time you load this, then
 exit emacs and start again.
 
 Also do this when you change package sources.
+** Commenting out sections
+You can copy sections to your own myinit.org but if you want to use
+this and "comment out" chunks, the easiest way is to add ":tangle no"
+to the end of the begin_src lines -- see the init.el section for 
+an example 
 ** Packages I should look into
    - helm-swoop
 * The init.el
@@ -39,7 +49,10 @@ this file
 
   (custom-set-variables
    '(inhibit-startup-screen t))
+#+end_#+begin_src language
+
 #+end_src
+
 * Basic Configuration
 ** Personal info
 #+begin_src emacs-lisp
@@ -47,6 +60,9 @@ this file
         user-mail-address "zamansky@gmail.com")
 #+end_src
 ** Install Package routine
+
+Taken from Sacha Chua's config.
+
 #+begin_src emacs-lisp
 (defun sacha/package-install (package &optional repository)
   "Install PACKAGE if it has not yet been installed.
@@ -62,18 +78,24 @@ If REPOSITORY is specified, use that."
 ** General Configuration
 *** Misc interface settings
 #+begin_src emacs-lisp
+
+; periodically automatically revert to what's on disk 
+; this makes it easier to keep files using btsync or dropbox
+; in sync since I frequently forget to save them
+
 (global-auto-revert-mode 1)
 (setq auto-revert-verbose nil)
 (global-set-key (kbd "<f5>") 'revert-buffer)
+
 (tool-bar-mode -1)
 
 (sacha/package-install 'hungry-delete)
 (require 'hungry-delete)
+
+; make it easy to restore old window configurations (in case you
+; do a ctrl-x 0 for instacne)
 (winner-mode t)
 #+end_src
-
-#+RESULTS:
-: hungry-delete
 
 *** Helm
 #+begin_src emacs-lisp
@@ -106,7 +128,6 @@ If REPOSITORY is specified, use that."
 
 
 #+end_src
-
 
 
 *** Help - guide-key
