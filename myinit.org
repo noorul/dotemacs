@@ -1,6 +1,7 @@
 #+TITLE: Mike Zamansky's Emacs configuration
-#+STARTUP: content
+#+STARTUP: overview
 #+OPTIONS: toc:4 h:4
+Use tab on each section to cycle through expanding and hiding sections
 * Notes
 ** Thanks
 Most of this file was taken from Sacha Chua's configuration. She's
