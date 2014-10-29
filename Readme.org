@@ -15,10 +15,19 @@ Here's my emacs configuration.
 - make sure you've updated your list of packages with 
   **M-x package-refresh-contents** and then grab chunks of
   this configuration and integrate it into your own.
-
 ** Full install
-- I'm assuming that you have nothing in your .emacs.d directory
-- Remove the .emacs file from your home directory (if you have a .emacs file)
+- get rid of your .emacs.d directory if you have one (**mv .emacs.d
+  dot-emacs.d-bak** or something like that if you want to save it).
+- Remove the .emacs file from your home directory (if you have a
+  .emacs file)
 - clone this and rename the directory .emacs.d
   git clone https://github.com/zamansky/dotemacs.git .emacs.d
+- load emacs and run **M-x package-refresh-contents**. You'll want to
+  run this command whenever you update the package sources in init.el
+- quit emacs
+- load emacs again
+- that should be it
+** Commenting out sections
+You can comment out some of the emacs-lisp blocks by adding **:tangle
+no** to the end of the begin_src lines
 
