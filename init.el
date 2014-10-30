@@ -1,4 +1,6 @@
 (package-initialize nil)
+(add-to-list 'load-path "~/.emacs.d/packages/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/packages/lisp")
 (require 'package)
 
 ;;(add-to-list 'package-archives
