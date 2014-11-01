@@ -1,4 +1,4 @@
-.#+TITLE: Mike Zamansky's Emacs configuration
+#+TITLE: Mike Zamansky's Emacs configuration
 #+STARTUP: overview
 #+OPTIONS: toc:4 h:4
 Use tab on each section to cycle through expanding and hiding sections
@@ -135,6 +135,8 @@ If REPOSITORY is specified, use that."
  ;   :bind (("C-c h" . helm-mini)))
  ; (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
 
+(use-package helm-swoop
+ :bind (("C-S-s" . helm-swoop)))
 
 #+end_src
 
@@ -316,6 +318,11 @@ M-x all lets you edit all lines matching a given regexp.
 (use-package all)
 #+end_src
 				
+** visual-regexp
+#+begin_src emacs-lisp
+(sacha/package-install 'visual-regexp)
+(use-package visual-regexp)
+#+end_src
 * Org
 
 ** Variables
@@ -541,6 +548,10 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** Misc
+#+begin_src emacs-lisp
+(setq-default tab-width 2)
+#+end_src
 ** Aggresive init
 #+begin_src emacs-lisp
 (sacha/package-install 'aggressive-indent)
