@@ -727,11 +727,18 @@ redefine =<l= to insert a Lisp block instead.
 #+begin_src emacs-lisp
 
 (sacha/package-install 'jedi)
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode t)
+        (setq tab-width 2)
+        (setq python-indent-offset 2)
+))
 (use-package jedi
 :init
 (progn
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
+
 ))
 #+end_src
 
