@@ -548,6 +548,11 @@ redefine =<l= to insert a Lisp block instead.
 : Could not load package Mu4e
 
 * Programming
+** GnuPlot (for babel)
+#+begin_src emacs-lisp
+(sacha/package-install 'gnuplot)
+(use-package gnuplot)
+#+end_src
 ** Misc
 #+begin_src emacs-lisp
 (setq-default tab-width 2)
