@@ -823,6 +823,15 @@ redefine =<l= to insert a Lisp block instead.
 #+RESULTS:
 : t
 
+** Clojure
+#+begin_src emacs-lisp
+(sacha/package-install 'clojure-mode)
+(sacha/package-install 'cider)
+(sacha/package-install 'ac-cider)
+(sacha/package-install 'clojure-cheatsheet)
+
+
+#+end_src
 * Key binding
 #+begin_src emacs-lisp
 (global-set-key (kbd "\e\ei")
