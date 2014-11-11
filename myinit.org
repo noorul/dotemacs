@@ -695,6 +695,9 @@ redefine =<l= to insert a Lisp block instead.
 
 ;;;;;;;;;;;;;;;;;;
 ;; pair management
+(sp-local-tag '(sgml-mode html-mode web-mode) "<" "<_>" "</_>" :transform 'sp-match-sgml-tags)
+(sp-local-tag '(tex-mode plain-tex-mode latex-mode) "\\b" "\\begin{_}" "\\end{_}")
+
 
 (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
 
