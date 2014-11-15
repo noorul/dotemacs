@@ -149,9 +149,12 @@ It's hard to remember keyboard shortcuts. The =guide-key= package pops up help a
 (sacha/package-install 'guide-key)
 (use-package guide-key
   :init
-  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c" "C-c p"))
   (guide-key-mode 1))  ; Enable guide-key-mode
 #+end_src
+
+#+RESULTS:
+: t
 
 *** Mode line format
 
@@ -603,7 +606,8 @@ redefine =<l= to insert a Lisp block instead.
 :init 
 (progn
 (projectile-global-mode)
-
+(require 'helm-projectile)
+(helm-projectile-on)
 )
 )
 #+end_src
