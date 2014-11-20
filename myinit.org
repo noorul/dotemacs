@@ -100,7 +100,7 @@ If REPOSITORY is specified, use that."
 
 (sacha/package-install 'hungry-delete)
 (require 'hungry-delete)
-
+(global-hungry-delete-mode)
 ; make it easy to restore old window configurations (in case you
 ; do a ctrl-x 0 for instacne)
 (winner-mode t)
