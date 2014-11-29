@@ -825,6 +825,10 @@ redefine =<l= to insert a Lisp block instead.
 
 ** Web
 #+begin_src emacs-lisp
+
+(sacha/package-install 'ac-html)
+
+
 (sacha/package-install 'web-mode)
 (use-package web-mode
 :init
@@ -834,6 +838,16 @@ redefine =<l= to insert a Lisp block instead.
       '(("underscorejs"    . "\\.js\\'")
         ("django"  . "\\.html\\.")))
 
+(use-package ac-html
+:init 
+(progn
+(add-to-list 'web-mode-ac-sources-alist
+  '("html" . (ac-source-html-tag
+                  ac-source-html-attribute
+                  ac-source-html-attribute-2)))
+
+)
+)
 )
 )
 
