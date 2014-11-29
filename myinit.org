@@ -213,19 +213,19 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 
 *** Theme
 #+BEGIN_SRC emacs-lisp
-  (set-background-color "Oldlace")
-  (setq default-frame-alist
-       '((background-color . "Oldlace")
-          ))
+  ;(set-background-color "Oldlace")
+  ;(setq default-frame-alist
+  ;     '((background-color . "Oldlace")
+  ;        ))
   
-  ;(sacha/package-install 'color-theme)
-  ;(use-package diff-mode)
-  ;(use-package color-theme
-  ; :init (progn
-  ;         (color-theme-initialize)
-  ;         (color-theme-subtle-hacker)
-  ;         ))
-
+;  (sacha/package-install 'color-theme)
+;  (use-package diff-mode)
+;  (use-package color-theme
+;   :init (progn
+;           (color-theme-initialize)
+;           (color-theme-subtle-hacker)
+;           ))
+(load-theme 'zenburn t)
 #+END_SRC
 *** Undo tree mode - visualize your undos and branches
 
