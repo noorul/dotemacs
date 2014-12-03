@@ -900,7 +900,7 @@ redefine =<l= to insert a Lisp block instead.
 (sacha/package-install 'cider)
 (sacha/package-install 'ac-cider)
 (sacha/package-install 'clojure-cheatsheet)
-
+(setq cider-lein-command "/home/zamansky/bin/lein")
 
 #+end_src
 * Key binding
