@@ -902,6 +902,9 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 * Key binding
 #+begin_src emacs-lisp
+
+(global-set-key (kbd "C-0") 'ace-jump-mode)
+
 (global-set-key (kbd "\e\ei")
 		(lambda () (interactive) (find-file "~/btsync/orgfiles/i.org")))
 
