@@ -306,6 +306,8 @@ Handy way of getting back to previous places.
 ** Ace-jump
 #+BEGIN_SRC emacs-lisp
 (sacha/package-install 'ace-jump-mode)
+(global-set-key (kbd "C-1") 'ace-jump-mode)
+
 #+END_SRC
 ** Ace-windows
 #+BEGIN_SRC emacs-lisp
@@ -903,7 +905,6 @@ redefine =<l= to insert a Lisp block instead.
 * Key binding
 #+begin_src emacs-lisp
 
-(global-set-key (kbd "C-0") 'ace-jump-mode)
 
 (global-set-key (kbd "\e\ei")
 		(lambda () (interactive) (find-file "~/btsync/orgfiles/i.org")))
