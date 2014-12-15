@@ -873,7 +873,7 @@ redefine =<l= to insert a Lisp block instead.
 (sacha/package-install 'ac-js2)
 (sacha/package-install 'tern)
 (sacha/package-install 'tern-auto-complete)
-
+(sacha/package-install 'cdnjs)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'js2-mode-hook 'tern-ac-setup)
 (add-hook 'js2-mode-hook 'tern-mode)
