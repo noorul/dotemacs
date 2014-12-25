@@ -310,6 +310,14 @@ Handy way of getting back to previous places.
 (global-set-key (kbd "C-2") 'ace-jump-line-mode)
 
 #+END_SRC
+** Ace-jump-zap
+#+begin_src emacs-lisp
+  (use-package ace-jump-zap
+    :ensure ace-jump-zap
+    :bind
+    (("M-z" . ace-jump-zap-up-to-char-dwim)
+     ("C-M-z" . ace-jump-zap-to-char-dwim)))
+#+end_src
 ** Ace-windows
 #+BEGIN_SRC emacs-lisp
 (sacha/package-install 'ace-window)
