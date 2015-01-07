@@ -18,8 +18,12 @@ You can copy sections to your own myinit.org but if you want to use
 this and "comment out" chunks, the easiest way is to add ":tangle no"
 to the end of the begin_src lines -- see the init.el section for 
 an example 
-** Packages I should look into
-   - helm-swoop
+** To install pcackages automatically use
+#+begin_src :tangle no
+(use-package pname
+:ensure t
+etc)
+#+end_src
 * The init.el
 
 The content between the begin_src and end_src should
