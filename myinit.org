@@ -340,6 +340,13 @@ Handy way of getting back to previous places.
 (global-set-key [remap other-window] 'ace-window)
 #+END_SRC
 
+** Ace-isearch
+#+begin_src emacs-lisp
+(use-package ace-isearch
+:ensure t
+:init (global-ace-isearch-mode +1)
+)
+#+end_src
 ** Browse-kill-ring - see what you've cut so that you can paste it       
 Make sense of the kill ring! This lets you list the contents of the
 kill ring and paste a specific item. You can also manipulate your kill
