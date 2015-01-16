@@ -836,34 +836,38 @@ redefine =<l= to insert a Lisp block instead.
 : t
 ** Python
 #+begin_src emacs-lisp
-  (sacha/package-install 'jedi)
+    (sacha/package-install 'jedi)
 
-  (add-hook 'python-mode-hook
-        (lambda ()
-          (setq indent-tabs-mode nil)
-          ;;(setq tab-width 2)
-          ;;(setq python-indent-offset 2)
+    (add-hook 'python-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            ;;(setq tab-width 2)
+            ;;(setq python-indent-offset 2)
+    ))
+
+    (use-package jedi
+    :init
+    (progn
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (setq jedi:complete-on-dot t)
+
+    ))
+
+    ;; (sacha/package-install 'elpy)
+    ;; (use-package elpy
+    ;; :init
+    ;; (progn 
+    ;; (elpy-enable)
+    ;; (add-hook 'python-mode-hook 'elpy-mode)
+    ;; ))
+  (use-package virtualenvwrapper
+    :ensure t
+    :init (progn
+            (venv-initialize-interactive-shells)
+            (venv-initialize-eshell)
+            (setq venv-location "~/envs")
   ))
-
-  (use-package jedi
-  :init
-  (progn
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-
-  ))
-
-  ;; (sacha/package-install 'elpy)
-  ;; (use-package elpy
-  ;; :init
-  ;; (progn 
-  ;; (elpy-enable)
-  ;; (add-hook 'python-mode-hook 'elpy-mode)
-  ;; ))
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Web
 #+begin_src emacs-lisp
