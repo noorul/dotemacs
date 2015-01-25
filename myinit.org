@@ -177,9 +177,10 @@ It's hard to remember keyboard shortcuts. The =guide-key= package pops up help a
 Display a more compact mode line
 
 #+begin_src emacs-lisp
+(use-package      smart-mode-line-powerline-theme
+    :ensure smart-mode-line-powerline-theme)
   (use-package smart-mode-line
     :ensure smart-mode-line
-    :ensure smart-modeline-powerline-theme
     :init 
     (progn
     (setq sml/no-confirm-load-theme t)
