@@ -178,7 +178,7 @@ On error (read-only), quit without selecting."
              ("w" whitespace-mode "whitespace")
              ("q" nil "cancel")))
           (global-set-key
-           (kbd "C-c C-l")
+           (kbd "C-c C-g")
            (defhydra gotoline 
                ( :pre (linum-mode 1)
                       :post (linum-mode -1))
