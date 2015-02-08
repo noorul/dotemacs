@@ -619,7 +619,10 @@ redefine =<l= to insert a Lisp block instead.
 ** reveal
 #+begin_src emacs-lisp
 (setq org-reveal-mathjax t)
-(sacha/package-install 'ox-reveal)
+
+(use-package ox-reveal
+:ensure ox-reveal)
+
 #+end_src
 
 ** Bindings
