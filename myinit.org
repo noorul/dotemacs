@@ -234,8 +234,6 @@ On error (read-only), quit without selecting."
              ("o" delete-other-windows "one" :color blue)
              ("i" ace-maximize-window "ace-one" :color blue)
              ("q" nil "cancel")))))
-#+end_#+begin_src language
-
 #+end_src
 
 *** Help - guide-key
