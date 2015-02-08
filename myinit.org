@@ -185,7 +185,7 @@ On error (read-only), quit without selecting."
              "goto"
              ("t" (lambda () (interactive)(move-to-window-line-top-bottom 0)) "top")
              ("b" (lambda () (interactive)(move-to-window-line-top-bottom -1)) "bottom")
-             ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "bottom")
+             ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "middle")
              ("c" recenter-top-bottom "recenter")
              ("n" next-line "down")
              ("p" (lambda () (interactive) (forward-line -1))  "up")
@@ -234,7 +234,10 @@ On error (read-only), quit without selecting."
              ("o" delete-other-windows "one" :color blue)
              ("i" ace-maximize-window "ace-one" :color blue)
              ("q" nil "cancel")))))
+#+end_#+begin_src language
+
 #+end_src
+
 *** Help - guide-key
 
 It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
