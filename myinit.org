@@ -187,6 +187,8 @@ On error (read-only), quit without selecting."
              ("b" (lambda () (interactive)(move-to-window-line-top-bottom -1)) "bottom")
              ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "bottom")
              ("c" recenter-top-bottom "recenter")
+             ("n" next-line "down")
+             ("p" (lambda () (interactive) (forward-line -1))  "up")
              ("g" goto-line "goto-line")
              ))
           (global-set-key
