@@ -158,7 +158,7 @@ On error (read-only), quit without selecting."
      (helm-keyboard-quit))))
 
 (define-key helm-map (kbd "DEL") 'helm-backspace)
-
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 #+end_src
 
