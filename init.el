@@ -37,6 +37,7 @@
  '(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
  '(org-startup-folded (quote content))
  '(org-startup-indented t)
+ '(paradox-github-token t)
  '(quack-programs
 	 (quote
 		("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi"))))

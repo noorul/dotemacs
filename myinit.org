@@ -19,11 +19,17 @@ this and "comment out" chunks, the easiest way is to add ":tangle no"
 to the end of the begin_src lines -- see the init.el section for 
 an example 
 ** To install pcackages automatically use
-#+begin_src :tangle no
-(use-package pname
-:ensure t
-etc)
+#+begin_src emacs-lisp :tangle no
+  (use-package smart-mode-line
+    :ensure smart-mode-line
+    :init 
+    (progn
+      (setq sml/no-confirm-load-theme t)
+      (sml/setup)
+      (sml/apply-theme 'powerline)
+      ))
 #+end_src
+
 * The init.el
 
 The content between the begin_src and end_src should
@@ -157,6 +163,78 @@ On error (read-only), quit without selecting."
 #+end_src
 
 
+*** Hydra
+#+begin_src emacs-lisp
+  (use-package hydra
+  :ensure hydra
+  :init (progn
+
+          (global-set-key
+           (kbd "C-c C-v")
+           (defhydra toggle (:color blue)
+             "toggle"
+             ("a" abbrev-mode "abbrev")
+             ("d" toggle-debug-on-error "debug")
+             ("f" auto-fill-mode "fill")
+             ("t" toggle-truncate-lines "truncate")
+             ("w" whitespace-mode "whitespace")
+             ("q" nil "cancel")))
+          (global-set-key
+           (kbd "C-c C-l")
+           (defhydra gotoline 
+               ( :pre (linum-mode 1)
+                      :post (linum-mode -1))
+             "goto"
+             ("t" (lambda () (interactive)(move-to-window-line-top-bottom 0)) "top")
+             ("b" (lambda () (interactive)(move-to-window-line-top-bottom -1)) "bottom")
+             ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "bottom")
+             ("c" recenter-top-bottom "recenter")
+             ("g" goto-line "goto-line")
+             ))
+          (global-set-key
+           (kbd "C-M-o")
+           (defhydra hydra-window ()
+             "window"
+             ("h" windmove-left)
+             ("j" windmove-down)
+             ("k" windmove-up)
+             ("l" windmove-right)
+             ("a" (lambda ()
+                    (interactive)
+                    (ace-window 1)
+                    (add-hook 'ace-window-end-once-hook
+                              'hydra-window/body)
+                    (throw 'hydra-disable t))
+              "ace")
+             ("v" (lambda ()
+                    (interactive)
+                    (split-window-right)
+                    (windmove-right))
+              "vert")
+             ("x" (lambda ()
+                    (interactive)
+                    (split-window-below)
+                    (windmove-down))
+              "horz")
+             ("s" (lambda ()
+                    (interactive)
+                    (ace-window 4)
+                    (add-hook 'ace-window-end-once-hook
+                              'hydra-window/body)
+                    (throw 'hydra-disable t))
+              "swap")
+             ("t" transpose-frame "'")
+             ("d" (lambda ()
+                    (interactive)
+                    (ace-window 16)
+                    (add-hook 'ace-window-end-once-hook
+                              'hydra-window/body)
+                    (throw 'hydra-disable t))
+              "del")
+             ("o" delete-other-windows "one" :color blue)
+             ("i" ace-maximize-window "ace-one" :color blue)
+             ("q" nil "cancel")))))
+#+end_src
 *** Help - guide-key
 
 It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
