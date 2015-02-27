@@ -478,17 +478,22 @@ M-x all lets you edit all lines matching a given regexp.
 
 ** Variables
 #+BEGIN_SRC emacs-lisp
-(custom-set-variables
- '(org-directory "~/btsync/orgfiles")
- '(org-agenda-files (quote ("~/btsync/orgfiles/")))
- '(org-default-notes-file (concat org-directory "/notes.org"))
- '(org-hide-leading-stars t)
- '(org-startup-folded (quote content))
- '(org-startup-indented t)
- '(org-export-html-postamble nil)
- '(org-mobile-directory "~/btsync/orgfiles/MobileOrg")
-'(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
- )
+  (custom-set-variables
+   '(org-directory "~/btsync/orgfiles")
+   '(org-agenda-files (quote ("~/btsync/orgfiles/")))
+   '(org-default-notes-file (concat org-directory "/notes.org"))
+   '(org-hide-leading-stars t)
+   '(org-startup-folded (quote content))
+   '(org-startup-indented t)
+   '(org-export-html-postamble nil)
+   '(org-mobile-directory "~/btsync/orgfiles/MobileOrg")
+  '(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
+   )
+
+  (setq org-file-apps
+        (append '(
+                  ("\\.pdf\\'" . "evince %s")
+                  ) org-file-apps ))
 
 #+END_SRC   
 
