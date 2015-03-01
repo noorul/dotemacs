@@ -185,8 +185,10 @@ On error (read-only), quit without selecting."
              "goto"
              ("t" (lambda () (interactive)(move-to-window-line-top-bottom 0)) "top")
              ("b" (lambda () (interactive)(move-to-window-line-top-bottom -1)) "bottom")
-             ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "bottom")
+             ("m" (lambda () (interactive)(move-to-window-line-top-bottom)) "middle")
              ("c" recenter-top-bottom "recenter")
+             ("n" next-line "down")
+             ("p" (lambda () (interactive) (forward-line -1))  "up")
              ("g" goto-line "goto-line")
              ))
           (global-set-key
@@ -233,6 +235,7 @@ On error (read-only), quit without selecting."
              ("i" ace-maximize-window "ace-one" :color blue)
              ("q" nil "cancel")))))
 #+end_src
+
 *** Help - guide-key
 
 It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
@@ -405,6 +408,10 @@ Handy way of getting back to previous places.
 #+BEGIN_SRC emacs-lisp
 (sacha/package-install 'ace-window)
 (global-set-key [remap other-window] 'ace-window)
+
+(custom-set-faces
+ '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 #+END_SRC
 
 ** Ace-isearch
