@@ -24,10 +24,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-	 (quote
-		("b71d5d49d0b9611c0afce5c6237aacab4f1775b74e513d8ba36ab67dfab35e5a" "9dae95cdbed1505d45322ef8b5aa90ccb6cb59e0ff26fef0b8f411dfc416c552" "3a727bdc09a7a141e58925258b6e873c65ccf393b2240c51553098ca93957723" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" default)))
- '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/btsync/orgfiles/")))
  '(org-default-notes-file (concat org-directory "/notes.org"))
  '(org-directory "~/btsync/orgfiles")
@@ -38,17 +34,13 @@
  '(org-startup-folded (quote content))
  '(org-startup-indented t)
  '(package-selected-packages
-	 (quote
-		(ac-php discover-js2-refactor discover-my-major engine-mode zenburn-theme web-mode visual-regexp virtualenvwrapper use-package undo-tree tern-auto-complete smartparens smart-mode-line-powerline-theme restclient rainbow-delimiters processing-snippets processing-mode paradox ox-reveal org-gcal ob-mongo ob-http magit json-mode js2-refactor jedi java-snippets idomenu hydra hungry-delete helm-projectile helm-c-yasnippet guide-key gnuplot gist fold-dwim flycheck-pyflakes expand-region elpy edit-server diff-hl color-theme clojure-cheatsheet cdnjs browse-kill-ring all aggressive-indent ace-window ace-jump-zap ace-isearch ac-js2 ac-html ac-cider 4clojure)))
- '(paradox-github-token t)
- '(quack-programs
-	 (quote
-		("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi"))))
+   (quote
+    (auctex zenburn-theme web-mode visual-regexp virtualenvwrapper use-package undo-tree tern-auto-complete smartparens smart-mode-line-powerline-theme restclient rainbow-delimiters processing-snippets processing-mode paradox ox-reveal org-gcal ob-mongo ob-http magit json-mode jedi java-snippets idomenu hydra hungry-delete helm-projectile helm-c-yasnippet guide-key gnuplot gist fold-dwim flycheck-pyflakes expand-region engine-mode elpy edit-server discover-my-major discover-js2-refactor diff-hl color-theme clojure-cheatsheet cdnjs browse-kill-ring all aggressive-indent ace-window ace-jump-zap ace-isearch ac-php ac-js2 ac-html ac-cider 4clojure))))
 (put 'narrow-to-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 (put 'dired-find-alternate-file 'disabled nil)
