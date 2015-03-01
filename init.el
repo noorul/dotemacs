@@ -39,7 +39,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	 (quote
-		(discover-js2-refactor discover-my-major engine-mode zenburn-theme web-mode visual-regexp virtualenvwrapper use-package undo-tree tern-auto-complete smartparens smart-mode-line-powerline-theme restclient rainbow-delimiters processing-snippets processing-mode paradox ox-reveal org-gcal ob-mongo ob-http magit json-mode js2-refactor jedi java-snippets idomenu hydra hungry-delete helm-projectile helm-c-yasnippet guide-key gnuplot gist fold-dwim flycheck-pyflakes expand-region elpy edit-server diff-hl color-theme clojure-cheatsheet cdnjs browse-kill-ring all aggressive-indent ace-window ace-jump-zap ace-isearch ac-js2 ac-html ac-cider 4clojure)))
+		(ac-php discover-js2-refactor discover-my-major engine-mode zenburn-theme web-mode visual-regexp virtualenvwrapper use-package undo-tree tern-auto-complete smartparens smart-mode-line-powerline-theme restclient rainbow-delimiters processing-snippets processing-mode paradox ox-reveal org-gcal ob-mongo ob-http magit json-mode js2-refactor jedi java-snippets idomenu hydra hungry-delete helm-projectile helm-c-yasnippet guide-key gnuplot gist fold-dwim flycheck-pyflakes expand-region elpy edit-server diff-hl color-theme clojure-cheatsheet cdnjs browse-kill-ring all aggressive-indent ace-window ace-jump-zap ace-isearch ac-js2 ac-html ac-cider 4clojure)))
  '(paradox-github-token t)
  '(quack-programs
 	 (quote
