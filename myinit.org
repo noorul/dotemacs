@@ -408,6 +408,10 @@ Handy way of getting back to previous places.
 #+BEGIN_SRC emacs-lisp
 (sacha/package-install 'ace-window)
 (global-set-key [remap other-window] 'ace-window)
+
+(custom-set-faces
+ '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 #+END_SRC
 
 ** Ace-isearch
@@ -481,17 +485,22 @@ M-x all lets you edit all lines matching a given regexp.
 
 ** Variables
 #+BEGIN_SRC emacs-lisp
-(custom-set-variables
- '(org-directory "~/btsync/orgfiles")
- '(org-agenda-files (quote ("~/btsync/orgfiles/")))
- '(org-default-notes-file (concat org-directory "/notes.org"))
- '(org-hide-leading-stars t)
- '(org-startup-folded (quote content))
- '(org-startup-indented t)
- '(org-export-html-postamble nil)
- '(org-mobile-directory "~/btsync/orgfiles/MobileOrg")
-'(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
- )
+  (custom-set-variables
+   '(org-directory "~/btsync/orgfiles")
+   '(org-agenda-files (quote ("~/btsync/orgfiles/")))
+   '(org-default-notes-file (concat org-directory "/notes.org"))
+   '(org-hide-leading-stars t)
+   '(org-startup-folded (quote content))
+   '(org-startup-indented t)
+   '(org-export-html-postamble nil)
+   '(org-mobile-directory "~/btsync/orgfiles/MobileOrg")
+  '(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
+   )
+
+  (setq org-file-apps
+        (append '(
+                  ("\\.pdf\\'" . "evince %s")
+                  ) org-file-apps ))
 
 #+END_SRC   
 
@@ -640,6 +649,14 @@ redefine =<l= to insert a Lisp block instead.
 
 #+RESULTS:
 : org-iswitchb
+
+* latex
+#+begin_src emacs-lisp
+(defun tex-view ()
+    (interactive)
+    (tex-send-command "evince" (tex-append tex-print-file ".pdf")))
+
+#+end_src
 
 * Mu4e
 #+begin_src emacs-lisp
