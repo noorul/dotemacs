@@ -658,8 +658,8 @@ redefine =<l= to insert a Lisp block instead.
 
 #+end_src
 
-* Mu4e
-#+begin_src emacs-lisp
+* Mu4e 
+#+begin_src emacs-lisp :tangle no
 
 (use-package mu4e
 :init
@@ -728,12 +728,12 @@ redefine =<l= to insert a Lisp block instead.
 #+begin_src emacs-lisp
 (setq-default tab-width 2)
 #+end_src
-** Aggresive init
+** Aggresive indent
 #+begin_src emacs-lisp
 (sacha/package-install 'aggressive-indent)
-(use-package aggresive-indent
+(use-package aggressive-indent
 :init (progn
-  (global-aggresive-indent-mode)
+  (global-aggressive-indent-mode 1)
 )
 )
 
@@ -780,13 +780,15 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 ** snippets
 #+begin_src emacs-lisp
+
 (sacha/package-install 'yasnippet)
 (sacha/package-install 'java-snippets)
 (sacha/package-install 'helm-c-yasnippet)
 (use-package yasnippet
+:ensure yasnippet
 :init
 (progn
-(setq yas-snippet-dirs "~/.emacs.d/snippets/")
+(setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
 (yas-global-mode 1)
 )
 )
@@ -1005,6 +1007,7 @@ redefine =<l= to insert a Lisp block instead.
         ("django"  . "\\.html\\.")))
 
 (use-package ac-html
+:ensure ac-html
 :init 
 (progn
 (add-to-list 'web-mode-ac-sources-alist
