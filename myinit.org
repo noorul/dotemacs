@@ -991,37 +991,34 @@ redefine =<l= to insert a Lisp block instead.
   (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
 
 #+end_src
-** Web
+** COMMENT Web
 #+begin_src emacs-lisp
+(setq web-mode-ac-sources-alist '())
 
-(sacha/package-install 'ac-html)
 
-
-(sacha/package-install 'web-mode)
-(use-package web-mode
-:init
-(progn
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(setq web-mode-engines-alist
-      '(("underscorejs"    . "\\.js\\'")
-        ("django"  . "\\.html\\.")))
-
-(use-package ac-html
-:ensure ac-html
-:init 
-(progn
-(add-to-list 'web-mode-ac-sources-alist
-  '("html" . (ac-source-html-tag
-                  ac-source-html-attribute)))
-)
-)
-)
-)
+  (sacha/package-install 'web-mode)
+  (use-package web-mode
+  :init
+  (progn
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  (setq web-mode-engines-alist
+        '(("underscorejs"    . "\\.js\\'")
+          ("django"  . "\\.html\\.")))
+))
+  (sacha/package-install 'ac-html)
+  (use-package ac-html
+  :ensure t
+  :init 
+  (progn
+    (add-to-list 'web-mode-ac-sources-alist
+                 '("html" . (ac-source-html-attribute-value
+                             ac-source-html-tag
+                             ac-source-html-attribute)))
+    ))
 
 #+end_src
 
 #+RESULTS:
-: t
 
 ** Javascript
 #+begin_src emacs-lisp

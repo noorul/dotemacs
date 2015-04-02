@@ -38,7 +38,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	 (quote
-		(edit-server 4clojure clojure-cheatsheet ac-cider cider clojure-mode cdnjs tern-auto-complete tern ac-js2 js2-refactor json-mode js2-mode web-mode ac-html ghc hi2 flycheck-haskell ac-haskell-process virtualenvwrapper jedi processing-snippets processing-mode auto-complete smartparens flycheck-pyflakes flycheck helm-c-yasnippet java-snippets yasnippet helm-projectile projectile gist magit rainbow-delimiters aggressive-indent gnuplot ox-reveal org-gcal ob-mongo visual-regexp all expand-region multiple-cursors browse-kill-ring ace-isearch ace-window ace-jump-zap ace-jump-mode undo-tree zenburn-theme color-theme smart-mode-line-powerline-theme guide-key hydra helm-swoop helm hungry-delete use-package))))
+		(bug-hunter edit-server 4clojure clojure-cheatsheet ac-cider cider clojure-mode cdnjs tern-auto-complete tern ac-js2 js2-refactor json-mode js2-mode web-mode ac-html ghc hi2 flycheck-haskell ac-haskell-process virtualenvwrapper jedi processing-snippets processing-mode auto-complete smartparens flycheck-pyflakes flycheck helm-c-yasnippet java-snippets yasnippet helm-projectile projectile gist magit rainbow-delimiters aggressive-indent gnuplot ox-reveal org-gcal ob-mongo visual-regexp all expand-region multiple-cursors browse-kill-ring ace-isearch ace-window ace-jump-zap ace-jump-mode undo-tree zenburn-theme color-theme smart-mode-line-powerline-theme guide-key hydra helm-swoop helm hungry-delete use-package))))
 (put 'narrow-to-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
