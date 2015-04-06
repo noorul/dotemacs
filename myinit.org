@@ -105,10 +105,13 @@ If REPOSITORY is specified, use that."
 (global-set-key (kbd "<f5>") 'revert-buffer)
 
 (tool-bar-mode -1)
+(use-package hungry-delete
+:ensure t
+:config (global-hungry-delete-mode))
 
-(sacha/package-install 'hungry-delete)
-(require 'hungry-delete)
-(global-hungry-delete-mode)
+;;(sacha/package-install 'hungry-delete)
+;;(require 'hungry-delete)
+;;(global-hungry-delete-mode)
 ; make it easy to restore old window configurations (in case you
 ; do a ctrl-x 0 for instacne)
 (winner-mode t)
@@ -241,11 +244,14 @@ On error (read-only), quit without selecting."
 It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
 
 #+begin_src emacs-lisp
-(sacha/package-install 'guide-key)
+;; (sacha/package-install 'guide-key)
+
 (use-package guide-key
-  :init
+:ensure t
+  :config
+(progn
   (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c" "C-c p"))
-  (guide-key-mode 1))  ; Enable guide-key-mode
+  (guide-key-mode 1)))  ; Enable guide-key-mode
 #+end_src
 
 #+RESULTS:
