@@ -1,0 +1,6 @@
+elpa
+auto-save-list
+.*
+myinit.el
+projectile-bookmarks.eld
+ac-comphist.dat
