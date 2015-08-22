@@ -664,66 +664,6 @@ redefine =<l= to insert a Lisp block instead.
 
 #+end_src
 
-* Mu4e 
-#+begin_src emacs-lisp :tangle no
-
-(use-package mu4e
-:init
-(progn
-(setq mu4e-get-mail-command "offlineimap"   ;; or fetchmail, or ...
-      mu4e-update-interval 300)             ;; update every 5 minutes
-
-(setq mu4e-user-mail-address-list '("zamansky@cstuy.org"))
-
- ;; something about ourselves
-(setq
- user-mail-address "zamansky@cstuy.org"
- user-full-name  "Mike Zamansky"
- mu4e-compose-signature
- (concat
-  "Mike Zamansky\n"
-  "http://cstuy.org\n"))
-
- ;; enable inline images
-(setq mu4e-view-show-images t)
-;; use imagemagick, if available
-(when (fboundp 'imagemagick-register-types)
-  (imagemagick-register-types))
-;; convert org mode to HTML automatically
-(setq org-mu4e-convert-to-html t)
-(require 'smtpmail)
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-stream-type 'starttls
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587)
-(setq message-kill-buffer-on-exit t)
-;;; message view action
-(add-to-list 'mu4e-view-actions
-	     '("View in browser" . mu4e-msgv-action-view-in-browser) t)
-
-
-(defun mu4e-msgv-action-view-in-browser (msg)
-  "View the body of the message in a web browser."
-  (interactive)
-  (let ((html (mu4e-msg-field (mu4e-message-at-point t) :body-html))
-	(tmpfile (format "%s/%d.html" temporary-file-directory (random))))
-    (unless html (error "No html part for this message"))
-    (with-temp-file tmpfile
-      (insert
-       "<html>"
-       "<head><meta http-equiv=\"content-type\""
-       "content=\"text/html;charset=UTF-8\">"
-       html))
-    (browse-url (concat "file://" tmpfile))))
-
-)
-)
-#+end_src
-
-#+RESULTS:
-: Could not load package Mu4e
-
 * Programming
 ** GnuPlot (for babel)
 #+begin_src emacs-lisp
@@ -1145,7 +1085,6 @@ narrowed."
 
 #+end_src
 * Misc			  
-
 ** Enable minibuffer completion
 [2013-03-31] Superseded by ido-hacks?
 
@@ -1156,7 +1095,6 @@ easier to discover commands.
 #+begin_src emacs-lisp :eval no :tangle no
 (icomplete-mode 1)
 #+end_src
-
 
 
 
