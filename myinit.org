@@ -38,6 +38,7 @@ an example
 - Hydra - installed look at config
 - endless parens dwim narrow
 - smartparens
+- magit
 * The init.el
 
 The content between the begin_src and end_src should
@@ -397,6 +398,15 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 (sacha/package-install 'visual-regexp)
 (use-package visual-regexp)
 #+end_src
+* Markdown 
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+:ensure t)
+
+#+END_SRC
+
+#+RESULTS:
+
 * Org
 ** Variables
 #+BEGIN_SRC emacs-lisp

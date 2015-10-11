@@ -32,7 +32,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	 (quote
-		(projectile js2-mode web-mode yasnippet yasnippets edit-server jedi flycheck-pyflakes flycheck rainbow-delimiters aggressive-indent auto-complete ox-reveal gnuplot ob-mongo visual-regexp browse-kill-ring ace-window avy swiper undo-tree zenburn-theme color-theme smart-mode-line-powerline-theme guide-key hydra hungry-delete use-package))))
+		(markdown-mode projectile js2-mode web-mode yasnippet yasnippets edit-server jedi flycheck-pyflakes flycheck rainbow-delimiters aggressive-indent auto-complete ox-reveal gnuplot ob-mongo visual-regexp browse-kill-ring ace-window avy swiper undo-tree zenburn-theme color-theme smart-mode-line-powerline-theme guide-key hydra hungry-delete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
