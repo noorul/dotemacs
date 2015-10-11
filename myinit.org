@@ -32,14 +32,12 @@ an example
 #+end_src
 
 * TO INSTALL LATER
-Multiple Cursors
-Expand
-Avy - need to config 
-Hydra
-projectile
-snippets
-autocomplete
-endless parens dwim narrow
+- Multiple Cursors
+- Expand
+- Avy - need to config hot key for ace-jump equiv
+- Hydra - installed look at config
+- endless parens dwim narrow
+- smartparens
 * The init.el
 
 The content between the begin_src and end_src should
@@ -553,6 +551,19 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 :ensure t
   :init (rainbow-delimiters-mode))
 #+end_src
+** projectile
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+:ensure t
+:init (progn
+(projectile-global-mode)
+(setq projectile-completion-system 'ivy)
+))
+
+#+END_SRC
+
+#+RESULTS:
+
 ** Flycheck
 #+begin_src emacs-lisp
 (use-package flycheck 
