@@ -15,7 +15,8 @@ exit emacs and start again.
 Also do this when you change package sources.
 ** Commenting out sections
 You can copy sections to your own myinit.org but if you want to use
-this and "comment out" chunks, the easiest way is to add ":tangle no"
+this and "comment out" chunks, the easiest w
+ay is to add ":tangle no"
 to the end of the begin_src lines -- see the init.el section for 
 an example 
 ** To install pcackages automatically use
@@ -30,6 +31,15 @@ an example
       ))
 #+end_src
 
+* TO INSTALL LATER
+Multiple Cursors
+Expand
+Avy - need to config 
+Hydra
+projectile
+snippets
+autocomplete
+endless parens dwim narrow
 * The init.el
 
 The content between the begin_src and end_src should
@@ -64,7 +74,7 @@ this file
 
 #+end_src
 
-* Basic Configuration
+* Basic Configu ation and setup
 ** Secrets 
 Stuff we don't want on github.
 #+begin_src emacs-lisp
@@ -92,77 +102,28 @@ If REPOSITORY is specified, use that."
 (sacha/package-install 'use-package)
 (require 'use-package)
 #+end_src
-** General Configuration
+* General Configuration
 *** Misc interface settings
 #+begin_src emacs-lisp
-
+(setq inhibit-startup-message t)
 ; periodically automatically revert to what's on disk 
 ; this makes it easier to keep files using btsync or dropbox
 ; in sync since I frequently forget to save them
-
 (global-auto-revert-mode 1)
 (setq auto-revert-verbose nil)
 (global-set-key (kbd "<f5>") 'revert-buffer)
 
 (tool-bar-mode -1)
+
+#+end_src
+*** Hungry Delete
+#+begin_src emacs-lisp
 (use-package hungry-delete
 :ensure t
 :config (global-hungry-delete-mode))
 
-;;(sacha/package-install 'hungry-delete)
-;;(require 'hungry-delete)
-;;(global-hungry-delete-mode)
-; make it easy to restore old window configurations (in case you
-; do a ctrl-x 0 for instacne)
-(winner-mode t)
-#+end_src
-
-*** Helm
-#+begin_src emacs-lisp
-(sacha/package-install 'helm)
-(sacha/package-install 'helm-swoop)
-      (use-package helm
-        :init
-        (progn 
-          (require 'helm-config) 
-          (require 'helm-eshell)
-          (require 'helm-files)
-          (require 'helm-grep)
-  (setq helm-candidate-number-limit 10)
-          ;; From https://gist.github.com/antifuchs/9238468
-          (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-                helm-input-idle-delay 0.01  ; this actually updates things
-                                              ; reeeelatively quickly.
-                helm-quick-update t
-                helm-M-x-requires-pattern nil
-                helm-ff-skip-boring-files t)
-  (helm-mode))
-  :config
- ; (progn
-      ;; I don't like the way switch-to-buffer uses history, since
-      ;; that confuses me when it comes to buffers I've already
-      ;; killed. Let's use ido instead.
-      (add-to-list 'helm-completing-read-handlers-alist '(switch-to-buffer . ido)))
- ;   :bind (("C-c h" . helm-mini)))
- ; (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
-
-(use-package helm-swoop
- :bind (("C-S-s" . helm-swoop)))
-
-(defun helm-backspace ()
-  "Forward to `backward-delete-char'.
-On error (read-only), quit without selecting."
-  (interactive)
-  (condition-case nil
-      (backward-delete-char 1)
-    (error
-     (helm-keyboard-quit))))
-
-(define-key helm-map (kbd "DEL") 'helm-backspace)
-(global-set-key (kbd "M-x") 'helm-M-x)
 
 #+end_src
-
 
 *** Hydra
 #+begin_src emacs-lisp
@@ -350,42 +311,39 @@ From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.htm
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
-* Eshell
+* Navigation
+** Swiper
 #+begin_src emacs-lisp
-(require 'eshell)
-(require 'em-smart)
-(setq eshell-where-to-jump 'begin)
-(setq eshell-review-quick-commands nil)
-(setq eshell-smart-space-goes-to-end t)
-(eshell-smart-initialize)
-(defun eshell-here ()
-  "Opens up a new shell in the directory associated with the
-current buffer's file. The eshell is renamed to match that
-directory to make multiple eshell windows easier."
-  (interactive)
-  (let* ((parent (if (buffer-file-name)
-                     (file-name-directory (buffer-file-name))
-                   default-directory))
-         (height (/ (window-total-height) 3))
-         (name   (car (last (split-string parent "/" t)))))
-    (split-window-vertically (- height))
-    (other-window 1)
-    (eshell "new")
-    (rename-buffer (concat "*eshell: " name "*"))
-
-    (insert (concat "ls"))
-    (eshell-send-input)))
-
-(global-set-key (kbd "C-!") 'eshell-here)
-
-(defun eshell/x ()
-  (insert "exit")
-  (eshell-send-input)
-  (delete-window))
-
+(use-package swiper
+:ensure t
+:init
+(progn
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key "\C-r" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key [f6] 'ivy-resume)
+))
 
 #+end_src
-* Navigation
+
+#+RESULTS:
+
+** Avy
+I'm not sure if I like this package - I have to check it out more but
+it's out of the way here
+#+begin_src emacs-lisp
+(use-package avy
+:ensure t
+:init
+(progn
+(avy-setup-default)
+))
+#+end_src
+
+#+RESULTS:
+
 ** Pop to mark
 
 Handy way of getting back to previous places.
@@ -395,38 +353,24 @@ Handy way of getting back to previous places.
 (setq set-mark-command-repeat-pop t)
 #+end_src
 
-** Ace-jump
-#+BEGIN_SRC emacs-lisp
-(sacha/package-install 'ace-jump-mode)
-(global-set-key (kbd "C-1") 'ace-jump-mode)
-(global-set-key (kbd "C-2") 'ace-jump-line-mode)
-
-#+END_SRC
-** Ace-jump-zap
-#+begin_src emacs-lisp
-  (use-package ace-jump-zap
-    :ensure ace-jump-zap
-    :bind
-    (("M-z" . ace-jump-zap-up-to-char-dwim)
-     ("C-M-z" . ace-jump-zap-to-char-dwim)))
-#+end_src
 ** Ace-windows
 #+BEGIN_SRC emacs-lisp
 (sacha/package-install 'ace-window)
+(use-package ace-window
+:ensure t
+:init 
+(progn
 (global-set-key [remap other-window] 'ace-window)
 
 (custom-set-faces
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+))
 #+END_SRC
 
-** Ace-isearch
-#+begin_src emacs-lisp
-(use-package ace-isearch
-:ensure t
-:init (global-ace-isearch-mode +1)
-)
-#+end_src
+#+RESULTS:
+
+
 ** Browse-kill-ring - see what you've cut so that you can paste it       
 Make sense of the kill ring! This lets you list the contents of the
 kill ring and paste a specific item. You can also manipulate your kill
@@ -450,57 +394,22 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 
 #+RESULTS:
 : t
-
-** Multiple cursors mode 
-I often define keyboard macros to process multiple lines in a region.
-Maybe =multiple-cursors= will be an even better way. Looks promising!
-[[http://emacsrocks.com/e13.html][See Emacs Rocks episode 13 (multiple-cursors) for a great demo]].
-
-#+begin_src emacs-lisp
-(sacha/package-install 'multiple-cursors)
-  (use-package multiple-cursors
-    :bind 
-     (("C->" . mc/mark-next-like-this)
-      ("C-<" . mc/mark-previous-like-this)
-      ("C-*" . mc/mark-all-like-this)))
-#+end_src
-
-Thanks to [[http://irreal.org/blog/?p=1733][Irreal]] and [[http://planet.emacsen.org/][Planet Emacsen]] for the link!
-
-** Expand
-#+begin_src emacs-lisp
-(sacha/package-install 'expand-region)
-(use-package expand-region
-  :bind ("C-=" . er/expand-region))
-#+end_src
-** All
-
-M-x all lets you edit all lines matching a given regexp.
-
-#+begin_src emacs-lisp
-(sacha/package-install 'all)
-(use-package all)
-#+end_src
-				
 ** visual-regexp
 #+begin_src emacs-lisp
 (sacha/package-install 'visual-regexp)
 (use-package visual-regexp)
 #+end_src
 * Org
-
 ** Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
-   '(org-directory "~/btsync/orgfiles")
-   '(org-agenda-files (quote ("~/btsync/orgfiles/")))
-   '(org-default-notes-file (concat org-directory "/notes.org"))
-   '(org-hide-leading-stars t)
-   '(org-startup-folded (quote content))
-   '(org-startup-indented t)
-   '(org-export-html-postamble nil)
-   '(org-mobile-directory "~/btsync/orgfiles/MobileOrg")
-  '(org-mobile-inbox-for-pull "~/btsync/orgfiles/MobileOrg/pull.org")
+'(org-agenda-files (quote ("~/btsync/orgfiles/")))
+'(org-default-notes-file (concat org-directory "/notes.org"))
+'(org-directory "~/btsync/orgfiles")
+'(org-export-html-postamble nil)
+'(org-hide-leading-stars t)
+'(org-startup-folded (quote content))
+'(org-startup-indented t)
    )
 
   (setq org-file-apps
@@ -511,41 +420,6 @@ M-x all lets you edit all lines matching a given regexp.
 #+END_SRC   
 
 #+RESULTS:
-
-** Agenda
-** Starting my weeks on Monday
-
-I like looking at weekends as [[http://sachachua.com/blog/2010/11/week-beginnings/][week beginnings]] instead, so I want the
-Org agenda to start on Saturdays.
-
-6 was Saturday so maybe play with this - MZ
-#+begin_src emacs-lisp
-(setq org-agenda-start-on-weekday 1)
-#+end_src
-
-** Structure templates
-
-Org makes it easy to insert blocks by typing =<s[TAB]=, etc.
-I hardly ever use LaTeX, but I insert a lot of Emacs Lisp blocks, so I
-redefine =<l= to insert a Lisp block instead.
-
-#+begin_src emacs-lisp
-  (setq org-structure-template-alist 
-        '(("s" "#+begin_src ?\n\n#+end_src" "<src lang=\"?\">\n\n</src>")
-          ("e" "#+begin_example\n?\n#+end_example" "<example>\n?\n</example>")
-          ("q" "#+begin_quote\n?\n#+end_quote" "<quote>\n?\n</quote>")
-          ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE" "<verse>\n?\n</verse>")
-          ("c" "#+BEGIN_COMMENT\n?\n#+END_COMMENT")
-          ("p" "#+BEGIN_PRACTICE\n?\n#+END_PRACTICE")
-          ("l" "#+begin_src emacs-lisp\n?\n#+end_src" "<src lang=\"emacs-lisp\">\n?\n</src>")
-          ("L" "#+latex: " "<literal style=\"latex\">?</literal>")
-          ("h" "#+begin_html\n?\n#+end_html" "<literal style=\"html\">\n?\n</literal>")
-          ("H" "#+html: " "<literal style=\"html\">?</literal>")
-          ("a" "#+begin_ascii\n?\n#+end_ascii")
-          ("A" "#+ascii: ")
-          ("i" "#+index: ?" "#+index: ?")
-          ("I" "#+include %file ?" "<include file=%file markup=\"?\">")))
-#+end_src
 ** Babel
 #+begin_src emacs-lisp
 (sacha/package-install 'ob-mongo)
@@ -567,6 +441,11 @@ redefine =<l= to insert a Lisp block instead.
    (haskell . t )
    (latex . t )
    ))))
+#+end_src
+** GnuPlot (for babel)
+#+begin_src emacs-lisp
+(use-package gnuplot
+:ensure t)
 #+end_src
 ** Publish
 #+begin_src emacs-lisp
@@ -608,32 +487,6 @@ redefine =<l= to insert a Lisp block instead.
 
       )
 #+end_src
-** gcal
-#+begin_src emacs-lisp
-
-  ;; give dummy values in case someone doesn't have
-  ;; a .emacs.secrets file
-  (if (not (boundp 'gcal-client-id))
-      (setq gcal-client-id nil))
-
-  (if (not (boundp 'gcal-client-secret))
-      (setq gcal-client-secret nil))
-
-
-
-  (sacha/package-install 'org-gcal)
-  (use-package org-gcal
-    :init
-  (setq 
-   org-gcal-client-id gcal-client-id
-   org-gcal-client-secret gcal-client-secret
-   org-gcal-file-alist '(("zamansky@gmail.com" .  "~/btsync/orgfiles/schedule.org")
-  )))
-#+end_src
-
-#+RESULTS:
-: t
-
 ** reveal
 #+begin_src emacs-lisp
 (setq org-reveal-mathjax t)
@@ -642,19 +495,6 @@ redefine =<l= to insert a Lisp block instead.
 :ensure ox-reveal)
 
 #+end_src
-
-** Bindings
-#+BEGIN_SRC emacs-lisp
-
-; org capture commant:  emacsclient -c -e "(org-capture)"     
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-
-#+END_SRC
-
-#+RESULTS:
-: org-iswitchb
 
 * latex
 #+begin_src emacs-lisp
@@ -665,19 +505,29 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 
 * Programming
-** GnuPlot (for babel)
-#+begin_src emacs-lisp
-(sacha/package-install 'gnuplot)
-(use-package gnuplot)
-#+end_src
 ** Misc
 #+begin_src emacs-lisp
 (setq-default tab-width 2)
 #+end_src
+** Autocomplete
+#+BEGIN_SRC emacs-lisp
+(use-package auto-complete
+:ensure t
+:init
+(progn
+(ac-config-default)
+(global-auto-complete-mode t)
+))
+
+
+#+END_SRC
+
+#+RESULTS:
+
 ** Aggresive indent
 #+begin_src emacs-lisp
-(sacha/package-install 'aggressive-indent)
 (use-package aggressive-indent
+:ensure t
 :init (progn
   (global-aggressive-indent-mode 1)
 )
@@ -686,334 +536,33 @@ redefine =<l= to insert a Lisp block instead.
 #+end_src
 ** Rainbow delimiters
 #+begin_src emacs-lisp
-(sacha/package-install 'rainbow-delimiters)
 (use-package rainbow-delimiters
+:ensure t
   :init (rainbow-delimiters-mode))
 #+end_src
-** Magit
-#+begin_src emacs-lisp
-  (sacha/package-install 'magit)
-
-  (use-package magit
-    :init (setq magit-diff-options '("-b")) ; ignore whitespace
-    :bind (("C-x v d" . magit-status)
-           ("C-c m" . magit-status)
-           ("C-c s" . magit-status)
-           ("C-x v p" . magit-push)) 
-           )
-#+end_src
-
-#+RESULTS:
-: t
-
-** gist
-#+begin_src emacs-lisp
-(sacha/package-install 'gist)
-(use-package gist)
-#+end_src
-** projectile
-#+begin_src emacs-lisp
-(sacha/package-install 'projectile)
-(sacha/package-install 'helm-projectile)
-(use-package projectile 
-:init 
-(progn
-(projectile-global-mode)
-(require 'helm-projectile)
-(helm-projectile-on)
-)
-)
-#+end_src
-** snippets
-#+begin_src emacs-lisp
-
-(sacha/package-install 'yasnippet)
-(sacha/package-install 'java-snippets)
-(sacha/package-install 'helm-c-yasnippet)
-(use-package yasnippet
-:ensure yasnippet
-:init
-(progn
-(setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
-(yas-global-mode 1)
-)
-)
-#+end_src
-
-#+RESULTS:
-: t
-
 ** Flycheck
 #+begin_src emacs-lisp
-(sacha/package-install 'flycheck)
-(sacha/package-install 'flycheck-pyflakes)
 (use-package flycheck 
+:ensure t
 :init
 (global-flycheck-mode t))
-#+end_src
-** Smartparens
-#+begin_src emacs-lisp
-(sacha/package-install 'smartparens)
-(use-package smartparens 
-:init
-(progn
-(require 'smartparens-config)
-(smartparens-global-mode t)
-
-;; highlights matching pairs
-(show-smartparens-global-mode t)
-
-(define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-(define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
-
-(define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
-(define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
-(define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-(define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-
-(define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
-(define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
-(define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
-(define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
-
-(define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
-(define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
-
-(define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
-(define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
-
-(define-key sp-keymap (kbd "M-<delete>") 'sp-unwrap-sexp)
-(define-key sp-keymap (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
-
-(define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
-(define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
-(define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-(define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
-
-(define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
-(define-key sp-keymap (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
-(define-key sp-keymap (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
-(define-key sp-keymap (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
-
-(define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
-(define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-(define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
-
-(define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
-(define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
-
-(define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
-(define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
-(define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
-(define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
-(define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
-(define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
-(define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
-(define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
-(define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
-
-;;;;;;;;;;;;;;;;;;
-;; pair management
-(sp-local-tag '(sgml-mode html-mode web-mode) "<" "<_>" "</_>" :transform 'sp-match-sgml-tags)
-(sp-local-tag '(tex-mode plain-tex-mode latex-mode) "\\b" "\\begin{_}" "\\end{_}")
-
-
-(sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-
-
-)
-
-)
-
-#+end_src
-
-#+RESULTS:
-: t
-
-** Autocomplete
-#+begin_src emacs-lisp
-(sacha/package-install 'auto-complete)
-(use-package auto-complete
-:init
-(progn
-(require 'auto-complete-config)
-(ac-config-default)
-(setq ac-sources '(
-		   ac-source-symbols
-		   ac-source-words-in-same-mode-buffers
-		   ac-source-functions
-		   ac-source-variables
-		   ac-source-dictionary
-		   ac-source-filename
-		   ac-source-yasnippet
-		   )) 
- 
-(setq ac-auto-show-menu 0)
-(auto-complete-mode t)
-
-))
-#+end_src
-
-#+RESULTS:
-: t
-
-** Processing
-#+begin_src emacs-lisp
-(sacha/package-install 'processing-mode)
-(sacha/package-install 'processing-snippets)
-(use-package processing-mode
-:init 
-(progn
-(add-to-list 'auto-mode-alist '("\\.pde$" . processing-mode))
-(setq processing-location "/home/zamansky/opt/processing/processing-java")
-)
+(use-package flycheck-pyflakes
+:ensure t
 )
 #+end_src
-
-#+RESULTS:
-: t
 ** Python
-#+begin_src emacs-lisp
-    (sacha/package-install 'jedi)
-
-    (add-hook 'python-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)
-            ;;(setq tab-width 2)
-            ;;(setq python-indent-offset 2)
-    ))
-
-    (use-package jedi
-    :init
-    (progn
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (setq jedi:complete-on-dot t)
-
-    ))
-
-    ;; (sacha/package-install 'elpy)
-    ;; (use-package elpy
-    ;; :init
-    ;; (progn 
-    ;; (elpy-enable)
-    ;; (add-hook 'python-mode-hook 'elpy-mode)
-    ;; ))
-  (use-package virtualenvwrapper
-    :ensure t
-    :init (progn
-            (venv-initialize-interactive-shells)
-            (venv-initialize-eshell)
-            (setq venv-location "~/envs")
-            (setq eshell-prompt-function
-                  (lambda ()
-                    (concat venv-current-name " $ ")))
-  ))
-#+end_src
-
-** Haskell
-#+begin_src emacs-lisp
-(sacha/package-install 'ac-haskell-process)
-(sacha/package-install 'flycheck-haskell)
-(sacha/package-install 'haskell-mode)
-(sacha/package-install 'hi2)
-(sacha/package-install 'ghc)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(custom-set-variables
-  '(haskell-process-suggest-remove-import-lines t)
-  '(haskell-process-auto-import-loaded-modules t)
-  '(haskell-process-log t))
-(eval-after-load 'haskell-mode '(progn
-  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
-  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
-  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
-  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
-  (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
-(eval-after-load 'haskell-cabal '(progn
-  (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
-
-#+end_src
-** COMMENT Web
-#+begin_src emacs-lisp
-(setq web-mode-ac-sources-alist '())
-
-
-  (sacha/package-install 'web-mode)
-  (use-package web-mode
-  :init
-  (progn
-  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-  (setq web-mode-engines-alist
-        '(("underscorejs"    . "\\.js\\'")
-          ("django"  . "\\.html\\.")))
+#+BEGIN_SRC emacs-lisp
+(use-package jedi
+:ensure t
+:init
+(progn
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
 ))
-  (sacha/package-install 'ac-html)
-  (use-package ac-html
-  :ensure t
-  :init 
-  (progn
-    (add-to-list 'web-mode-ac-sources-alist
-                 '("html" . (ac-source-html-attribute-value
-                             ac-source-html-tag
-                             ac-source-html-attribute)))
-    ))
-
-#+end_src
+#+END_SRC
 
 #+RESULTS:
 
-** Javascript
-#+begin_src emacs-lisp
-(sacha/package-install 'js2-mode)
-(sacha/package-install 'json-mode)
-(sacha/package-install 'js2-refactor)
-(sacha/package-install 'ac-js2)
-(sacha/package-install 'tern)
-(sacha/package-install 'tern-auto-complete)
-(sacha/package-install 'cdnjs)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-hook 'js2-mode-hook 'tern-ac-setup)
-(add-hook 'js2-mode-hook 'tern-mode)
-(use-package js2-mode
-:init
-(progn
-
-
-)
-)
-(use-package tern
-:init
-(progn
-(tern-ac-setup)
-(add-hook 'js-mode-hook 'tern-ac-setup 'tern-mode)
-)
-)
-
-#+end_src
-
-#+RESULTS:
-: t
-
-** Clojure
-#+begin_src emacs-lisp
-(sacha/package-install 'clojure-mode)
-(sacha/package-install 'cider)
-(sacha/package-install 'ac-cider)
-(sacha/package-install 'clojure-cheatsheet)
-(sacha/package-install '4clojure)
-(defadvice 4clojure-open-question (around 4clojure-open-question-around)
-  "Start a cider/nREPL connection if one hasn't already been started when
-opening 4clojure questions"
-  ad-do-it
-  (unless cider-current-clojure-buffer
-    (cider-jack-in)))
-(setq cider-lein-command "/home/zamansky/bin/lein")
-
-#+end_src
 * Key binding
 #+begin_src emacs-lisp
 
@@ -1030,83 +579,14 @@ opening 4clojure questions"
 		(lambda () (interactive) (find-file "~/btsync/orgfiles/cstuy.org")))
 
 #+end_src
-* Toggle from endless parens
-#+begin_src emacs-lisp
-(define-prefix-command 'endless/toggle-map)
-;; The manual recommends C-c for user keys, but C-x t is
-;; always free, whereas C-c t is used by some modes.
-(define-key ctl-x-map "t" 'endless/toggle-map)
-(define-key endless/toggle-map "c" #'column-number-mode)
-(define-key endless/toggle-map "d" #'toggle-debug-on-error)
-(define-key endless/toggle-map "e" #'toggle-debug-on-error)
-(define-key endless/toggle-map "f" #'auto-fill-mode)
-(define-key endless/toggle-map "l" #'toggle-truncate-lines)
-(define-key endless/toggle-map "q" #'toggle-debug-on-quit)
-(define-key endless/toggle-map "t" #'endless/toggle-theme)
-;;; Generalized version of `read-only-mode'.
-(define-key endless/toggle-map "r" #'dired-toggle-read-only)
-(autoload 'dired-toggle-read-only "dired" nil t)
-(define-key endless/toggle-map "w" #'whitespace-mode)
-
-#+end_src
-* Narrow dwim + orgmode save from endless parens
-#+begin_src emacs-lisp
-(defun narrow-or-widen-dwim (p)
-  "If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
-Intelligently means: region, org-src-block, org-subtree, or defun,
-whichever applies first.
-Narrowing to org-src-block actually calls `org-edit-src-code'.
-
-With prefix P, don't widen, just narrow even if buffer is already
-narrowed."
-  (interactive "P")
-  (declare (interactive-only))
-  (cond ((and (buffer-narrowed-p) (not p)) (widen))
-        ((region-active-p)
-         (narrow-to-region (region-beginning) (region-end)))
-        ((derived-mode-p 'org-mode)
-         ;; `org-edit-src-code' is not a real narrowing command.
-         ;; Remove this first conditional if you don't want it.
-         (cond ((ignore-errors (org-edit-src-code))
-                (delete-other-windows))
-               ((org-at-block-p)
-                (org-narrow-to-block))
-               (t (org-narrow-to-subtree))))
-        (t (narrow-to-defun))))
-
-(define-key endless/toggle-map "n" #'narrow-or-widen-dwim)
-;; This line actually replaces Emacs' entire narrowing keymap, that's
-;; how much I like this command. Only copy it if that's what you want.
-(define-key ctl-x-map "n" #'narrow-or-widen-dwim)
-
-(eval-after-load 'org-src
-  '(define-key org-src-mode-map
-     "\C-x\C-s" #'org-edit-src-exit))
-
-#+end_src
 * Misc			  
-** Enable minibuffer completion
-[2013-03-31] Superseded by ido-hacks?
-
-It can be difficult to remember the full names of Emacs commands, so I
-use =icomplete-mode= for minibuffer completion. This also makes it
-easier to discover commands.
-
-#+begin_src emacs-lisp :eval no :tangle no
-(icomplete-mode 1)
-#+end_src
-
-
-
-
 ** edit-server for edit with emacs
 #+begin_src emacs-lisp
-(sacha/package-install 'edit-server)
 (use-package edit-server
+:ensure t
   :init (edit-server-start)
 )
 #+end_src
 
 #+RESULTS:
 : t
-
