@@ -576,6 +576,33 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 
 #+RESULTS:
 
+** Web
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+:ensure t
+:init
+(progn
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("/some/react/path/.*\\.js[x]?\\'" . web-mode))
+
+(setq web-mode-content-types-alist
+  '(("json" . "/some/path/.*\\.api\\'")
+    ("xml"  . "/other/path/.*\\.api\\'")
+    ("jsx"  . "/some/react/path/.*\\.js[x]?\\'")))
+))
+
+(use-package js2-mode
+:ensure t
+:init
+(progn
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+))
+
+#+END_SRC
+
+#+RESULTS:
+
 * Key binding
 #+begin_src emacs-lisp
 
