@@ -131,7 +131,7 @@ If REPOSITORY is specified, use that."
   :init (progn
 
           (global-set-key
-           (kbd "C-c C-v")
+           (kbd "C-x t")
            (defhydra toggle (:color blue)
              "toggle"
              ("a" abbrev-mode "abbrev")
@@ -141,7 +141,7 @@ If REPOSITORY is specified, use that."
              ("w" whitespace-mode "whitespace")
              ("q" nil "cancel")))
           (global-set-key
-           (kbd "C-c C-g")
+           (kbd "C-x g")
            (defhydra gotoline 
                ( :pre (linum-mode 1)
                       :post (linum-mode -1))
@@ -155,7 +155,7 @@ If REPOSITORY is specified, use that."
              ("g" goto-line "goto-line")
              ))
           (global-set-key
-           (kbd "C-M-o")
+           (kbd "C-x w")
            (defhydra hydra-window ()
              "window"
              ("h" windmove-left)
@@ -198,6 +198,8 @@ If REPOSITORY is specified, use that."
              ("i" ace-maximize-window "ace-one" :color blue)
              ("q" nil "cancel")))))
 #+end_src
+
+#+RESULTS:
 
 *** Help - guide-key
 
