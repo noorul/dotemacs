@@ -524,6 +524,19 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 
 #+RESULTS:
 
+** yasnippets
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+:ensure t
+:init
+(progn
+(yas-global-mode 1)
+)
+)
+#+END_SRC
+
+#+RESULTS:
+
 ** Aggresive indent
 #+begin_src emacs-lisp
 (use-package aggressive-indent
