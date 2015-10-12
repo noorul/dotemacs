@@ -522,7 +522,11 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 ** Magit
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-:ensure t)
+:ensure t
+:init
+(progn
+(bind-key "C-x g" 'magit-status)
+))
 #+END_SRC
 
 #+RESULTS:
