@@ -37,8 +37,6 @@ an example
 - Avy - need to config hot key for ace-jump equiv
 - Hydra - installed look at config
 - endless parens dwim narrow
-- smartparens
-- magit
 * The init.el
 
 The content between the begin_src and end_src should
@@ -519,6 +517,21 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 #+begin_src emacs-lisp
 (setq-default tab-width 2)
 #+end_src
+** smartparens
+#+BEGIN_SRC emacs-lisp
+
+(use-package smartparens
+:ensure smartparens
+:config 
+(progn
+(require 'smartparens-config)
+(require 'smartparens-html)
+(require 'smartparens-python)
+(require 'smartparens-latex)
+(smartparens-global-mode t)
+))
+#+END_SRC
+
 ** Magit
 #+BEGIN_SRC emacs-lisp
 (use-package magit
