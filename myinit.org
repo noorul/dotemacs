@@ -121,6 +121,19 @@ If REPOSITORY is specified, use that."
 
 
 #+end_src
+** Expand Region
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+:ensure t
+:config
+(progn
+(global-set-key (kbd "C-=") 'er/expand-region)
+)
+)
+
+#+END_SRC
+
+#+RESULTS:
 
 *** Hydra
 #+begin_src emacs-lisp
