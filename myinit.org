@@ -677,17 +677,15 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 #+RESULTS:
 
 ** Javascript
-#+BEGIN_SRC emacs-listp
-(use-packge tern
+#+BEGIN_SRC emacs-lisp
+(use-package tern
 :ensure tern
-:ensure tern-autocomplete
+:ensure tern-auto-complete
 :config
 (progn
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+(tern-ac-setup)
 ))
 
 #+END_SRC
