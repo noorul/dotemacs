@@ -220,6 +220,7 @@ It's hard to remember keyboard shortcuts. The =guide-key= package pops up help a
 #+begin_src emacs-lisp
 ;; (sacha/package-install 'guide-key)
 
+(require 'tex)
 (use-package guide-key
 :ensure t
   :config
@@ -523,9 +524,12 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 :ensure ox-reveal)
 
 #+end_src
-
 * latex
 #+begin_src emacs-lisp
+
+(use-package tex
+:ensure auctex)
+
 (defun tex-view ()
     (interactive)
     (tex-send-command "evince" (tex-append tex-print-file ".pdf")))
