@@ -1,3 +1,5 @@
+;; added this comment in period 5
+
 (package-initialize nil)
 (add-to-list 'load-path "~/.emacs.d/packages/org-mode/contrib/lisp")
 (add-to-list 'load-path "~/.emacs.d/packages/org-mode/lisp")
@@ -31,4 +33,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+<<<<<<< HEAD
  )
+=======
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+(put 'narrow-to-region 'disabled nil)
+>>>>>>> adc98eba109c2851161e9bb38e084b41aeea0e6e
