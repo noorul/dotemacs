@@ -1,3 +1,5 @@
+;; added this comment in period 5
+
 (package-initialize nil)
 (add-to-list 'load-path "~/.emacs.d/packages/org-mode/contrib/lisp")
 (add-to-list 'load-path "~/.emacs.d/packages/org-mode/lisp")
