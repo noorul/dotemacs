@@ -20,3 +20,24 @@
 (org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
 
  
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/btsync/orgfiles/")))
+ '(org-default-notes-file (concat org-directory "/notes.org"))
+ '(org-directory "~/btsync/orgfiles")
+ '(org-export-html-postamble nil)
+ '(org-hide-leading-stars t)
+ '(org-startup-folded (quote content))
+ '(org-startup-indented t)
+ '(package-selected-packages
+	 (quote
+		(beacon zenburn-theme yasnippet web-mode visual-regexp use-package undo-tree tern-auto-complete swiper smartparens smart-mode-line-powerline-theme rainbow-delimiters projectile ox-reveal ob-mongo markdown-mode magit js2-mode jedi hydra hungry-delete guide-key gnuplot flycheck-pyflakes expand-region edit-server color-theme browse-kill-ring auctex aggressive-indent ace-window ac-cider))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))

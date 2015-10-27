@@ -324,6 +324,19 @@ From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.htm
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
+*** Beacon mode
+Flashes cursor when you scroll
+#+BEGIN_SRC emacs-lisp
+(use-package beacon-mode
+:init
+(progn
+(beacon-mode 1)
+(setq beacon-push-mark 35)
+(setq beacon-color "#666600")))
+#+END_SRC
+
+#+RESULTS:
+
 * Navigation
 ** Swiper
 #+begin_src emacs-lisp
