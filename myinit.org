@@ -328,7 +328,7 @@ From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.htm
 Flashes cursor when you scroll
 #+BEGIN_SRC emacs-lisp
 (use-package beacon-mode
-:init
+:config
 (progn
 (beacon-mode 1)
 (setq beacon-push-mark 35)
