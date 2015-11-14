@@ -72,6 +72,14 @@ this file
 #+end_src
 
 * Basic Configu ation and setup
+** Set initial size
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil':height 150)
+(setq default-frame-alist
+      '((top . 10) (left . 1000)
+        (width . 90) (height . 50)
+        ))
+#+END_SRC
 ** Secrets 
 Stuff we don't want on github.
 #+begin_src emacs-lisp
@@ -738,8 +746,34 @@ narrowed."
 (use-package cider
 :ensure cider
 :ensure ac-cider
+:ensure clojure-snippets
+:config (progn
+
+(add-hook 'cider-mode-hook #'eldoc-mode)
+(setq nrepl-log-messages nil)
+(setq nrepl-hide-special-buffers t)
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)))
+
+)
 )
 
+(use-package 4clojure 
+:ensure t
+:config
+(progn
+(defadvice 4clojure-open-question (around 4clojure-open-question-around)
+  "Start a cider/nREPL connection if one hasn't already been started when
+opening 4clojure questions"
+  ad-do-it
+  (unless cider-current-clojure-buffer
+    (cider-jack-in)))
+))
 
 #+END_SRC
 
