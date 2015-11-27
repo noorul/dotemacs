@@ -71,7 +71,7 @@ this file
 
 #+end_src
 
-* Basic Configu ation and setup
+* Basic Configuration and setup
 ** Set initial size
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil':height 150)
@@ -108,7 +108,7 @@ If REPOSITORY is specified, use that."
 (require 'use-package)
 #+end_src
 * General Configuration
-*** Misc interface settings
+** Misc interface settings
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
 ; periodically automatically revert to what's on disk 
@@ -121,7 +121,7 @@ If REPOSITORY is specified, use that."
 (tool-bar-mode -1)
 
 #+end_src
-*** Hungry Delete
+** Hungry Delete
 #+begin_src emacs-lisp
 (use-package hungry-delete
 :ensure t
@@ -143,9 +143,9 @@ If REPOSITORY is specified, use that."
 
 #+RESULTS:
 
-*** Hydra
+** Hydra
 #+begin_src emacs-lisp
-  (use-package hydra
+  (use-package hydra 
   :ensure hydra
   :init (progn
 
@@ -220,12 +220,27 @@ If REPOSITORY is specified, use that."
 #+end_src
 
 #+RESULTS:
+** Which-key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+:ensure t
+:config
+(progn
+(which-key-setup-side-window-bottom)
+;(which-key-setup-side-window-right)
+(which-key-mode)
+))
+#+END_SRC
 
-*** Help - guide-key
+#+RESULTS:
+: t
+
+** Help - guide-key
+commented out for now
 
 It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;; (sacha/package-install 'guide-key)
 
 (use-package guide-key
@@ -239,7 +254,7 @@ It's hard to remember keyboard shortcuts. The =guide-key= package pops up help a
 #+RESULTS:
 : t
 
-*** Mode line format
+** Mode line format
 
 Display a more compact mode line
 
@@ -277,7 +292,7 @@ Hide minor modes I care less about:
 #+RESULTS:
 |
 
-*** Change "yes or no" to "y or n"
+** Change "yes or no" to "y or n"
 
 Lazy people like me never want to type "yes" when "y" will suffice.
 
@@ -285,7 +300,7 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 (fset 'yes-or-no-p 'y-or-n-p)   
 #+end_src
 
-*** Theme
+** Theme
 #+BEGIN_SRC emacs-lisp
   ;(set-background-color "Oldlace")
   ;(setq default-frame-alist
@@ -304,7 +319,7 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 (sacha/package-install 'zenburn-theme)
 (load-theme 'zenburn t)
 #+END_SRC
-*** Undo tree mode - visualize your undos and branches
+** Undo tree mode - visualize your undos and branches
 
 People often struggle with the Emacs undo model, where there's really no concept of "redo" - you simply undo the undo. 
 # 
@@ -323,7 +338,7 @@ This lets you use =C-x u= (=undo-tree-visualize=) to visually walk through the c
 #+RESULTS:
 : t
 
-*** UTF-8
+** UTF-8
 
 From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
 #+begin_src emacs-lisp
@@ -332,7 +347,7 @@ From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.htm
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
-*** Beacon mode
+** Beacon mode
 Flashes cursor when you scroll
 #+BEGIN_SRC emacs-lisp
 (use-package beacon
