@@ -818,7 +818,7 @@ narrowed."
 :ensure ac-cider
 :ensure clojure-snippets
 :config (progn
-
+(setq cider-lein-command "/home/zamansky/bin/lein")
 (add-hook 'cider-mode-hook #'eldoc-mode)
 (setq nrepl-log-messages nil)
 (setq nrepl-hide-special-buffers t)
