@@ -515,9 +515,9 @@ narrowed."
 ** Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
-'(org-agenda-files (quote ("~/btsync/orgfiles/")))
+'(org-agenda-files (quote ("~/ownCloud/orgfiles/")))
 '(org-default-notes-file (concat org-directory "/notes.org"))
-'(org-directory "~/btsync/orgfiles")
+'(org-directory "~/ownCloud/orgfiles")
 '(org-export-html-postamble nil)
 '(org-hide-leading-stars t)
 '(org-startup-folded (quote content))
@@ -868,15 +868,15 @@ opening 4clojure questions"
 
 
 (global-set-key (kbd "\e\ei")
-		(lambda () (interactive) (find-file "~/btsync/orgfiles/i.org")))
+		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/i.org")))
 
 (global-set-key (kbd "\e\ea")
-		(lambda () (interactive) (find-file "~/btsync/orgfiles/apcs.org")))
+		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/apcs.org")))
 
 (global-set-key (kbd "\e\es")
-		(lambda () (interactive) (find-file "~/btsync/orgfiles/softdev.org")))
+		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/softdev.org")))
 (global-set-key (kbd "\e\ec")
-		(lambda () (interactive) (find-file "~/btsync/orgfiles/cstuy.org")))
+		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/cstuy.org")))
 
 #+end_src
 * Misc			  
