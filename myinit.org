@@ -316,8 +316,10 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 ;           (color-theme-initialize)
 ;           (color-theme-subtle-hacker)
 ;           ))
-  
+
 (sacha/package-install 'color-theme)
+(use-package solarized-theme
+:ensure solarized-theme)
 (sacha/package-install 'zenburn-theme)
 (load-theme 'zenburn t)
 #+END_SRC
@@ -515,9 +517,9 @@ narrowed."
 ** Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
-'(org-agenda-files (quote ("~/ownCloud/orgfiles/")))
+'(org-agenda-files (quote ("~/cloud/orgfiles/")))
 '(org-default-notes-file (concat org-directory "/notes.org"))
-'(org-directory "~/ownCloud/orgfiles")
+'(org-directory "~/cloud/orgfiles")
 '(org-export-html-postamble nil)
 '(org-hide-leading-stars t)
 '(org-startup-folded (quote content))
@@ -561,6 +563,9 @@ narrowed."
 #+end_src
 ** Publish
 #+begin_src emacs-lisp
+(use-package ox-twbs
+:ensure ox-twbs
+)
 (setq org-publish-project-alist
       '(
            ("blog-posts"
@@ -569,7 +574,8 @@ narrowed."
 		:publishing-directory "~/gh/cestlaz.github.io/_drafts/"
 		:recursive nil		      
 ;      		:publishing-function org-publish-org-to-html
-      		:publishing-function org-html-publish-to-html
+:publishing-function org-html-publish-to-html
+;:publishing-function org-twbs-publish-to-html
       		:headline-levels 4
 		:auto-index nil
 		:htmlized-source t
@@ -599,6 +605,11 @@ narrowed."
 
       )
 #+end_src
+
+#+RESULTS:
+| blog-posts | :base-directory | ~/gh/cestlaz.github.io/_org/       | :base-extension | org | :publishing-directory | ~/gh/cestlaz.github.io/_drafts/      | :recursive | nil | :publishing-function | org-html-publish-to-html | :headline-levels | 4 | :auto-index | nil | :htmlized-source | t   | :section-numbers | nil | :toc           | nil | :auto-preamble     | nil | :table-of-contents | nil  | :html-extension | html | :body-only | t |
+| apcs-hw    | :base-directory | ~/gh/stuycs-apcs-z.github.io/_org/ | :base-extension | org | :publishing-directory | ~/gh/stuycs-apcs-z.github.io/_posts/ | :recursive | nil | :publishing-function | org-html-publish-to-html | :headline-levels | 4 | :auto-index | nil | :section-numbers | nil | :toc             | nil | :auto-preamble | nil | :table-of-contents | nil | :html-extension    | html | :body-only      | t    |            |   |
+
 ** reveal
 #+begin_src emacs-lisp
 (setq org-reveal-mathjax t)
@@ -868,15 +879,15 @@ opening 4clojure questions"
 
 
 (global-set-key (kbd "\e\ei")
-		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/i.org")))
+		(lambda () (interactive) (find-file "~/cloud/orgfiles/i.org")))
 
 (global-set-key (kbd "\e\ea")
-		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/apcs.org")))
+		(lambda () (interactive) (find-file "~/cloud/orgfiles/apcs.org")))
 
 (global-set-key (kbd "\e\es")
-		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/softdev.org")))
+		(lambda () (interactive) (find-file "~/cloud/orgfiles/softdev.org")))
 (global-set-key (kbd "\e\ec")
-		(lambda () (interactive) (find-file "~/ownCloud/orgfiles/cstuy.org")))
+		(lambda () (interactive) (find-file "~/cloud/orgfiles/cstuy.org")))
 
 #+end_src
 * Misc			  

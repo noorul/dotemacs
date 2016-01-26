@@ -25,6 +25,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+	 (quote
+		("f024aea709fb96583cf4ced924139ac60ddca48d25c23a9d1cd657a2cf1e4728" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
  '(org-agenda-files (quote ("~/btsync/orgfiles/")))
  '(org-default-notes-file (concat org-directory "/notes.org"))
  '(org-directory "~/btsync/orgfiles")
@@ -34,7 +37,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	 (quote
-		(fireplace cdnjs 4clojure clojure-snippets org-bullets zenburn-theme yasnippet which-key web-mode visual-regexp use-package undo-tree tern-auto-complete swiper smartparens smart-mode-line-powerline-theme rainbow-delimiters projectile ox-reveal ob-mongo markdown-mode magit live-py-mode js2-mode jedi hydra hungry-delete guide-key gnuplot flycheck-pyflakes expand-region edit-server color-theme browse-kill-ring beacon auctex aggressive-indent ace-window ac-cider))))
+		(solarized-theme ox-twbs fireplace cdnjs 4clojure clojure-snippets org-bullets zenburn-theme yasnippet which-key web-mode visual-regexp use-package undo-tree tern-auto-complete swiper smartparens smart-mode-line-powerline-theme rainbow-delimiters projectile ox-reveal ob-mongo markdown-mode magit live-py-mode js2-mode jedi hydra hungry-delete guide-key gnuplot flycheck-pyflakes expand-region edit-server color-theme browse-kill-ring beacon auctex aggressive-indent ace-window ac-cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
