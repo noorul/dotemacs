@@ -280,7 +280,8 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 ;           ))
 
 (sacha/package-install 'color-theme)
-(use-package spacemacs
+(use-package spacemacs-theme
+:ensure t
 :init
 (load-theme 'spacemacs-dark t))
 
