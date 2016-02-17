@@ -256,44 +256,6 @@ It's hard to remember keyboard shortcuts. The =guide-key= package pops up help a
 #+RESULTS:
 : t
 
-** Mode line format
-
-Display a more compact mode line
-
-#+begin_src emacs-lisp
-(use-package      smart-mode-line-powerline-theme
-    :ensure smart-mode-line-powerline-theme)
-  (use-package smart-mode-line
-    :ensure smart-mode-line
-    :init 
-    (progn
-    (setq sml/no-confirm-load-theme t)
-    (sml/setup)
-    (sml/apply-theme 'powerline))
-)
-
-#+end_src
-
-#+RESULTS:
-: Could not load package smart-mode-line
-
-Hide minor modes I care less about:
-
-#+begin_src emacs-lisp
-(require 'diminish)
-(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
-(eval-after-load "guide-key" '(diminish 'guide-key-mode))
-(eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "guide-key" '(diminish 'guide-key-mode))
-(eval-after-load "eldoc" '(diminish 'eldoc-mode))
-(diminish 'visual-line-mode)
-#+end_src
-
-
-#+RESULTS:
-|
-
 ** Change "yes or no" to "y or n"
 
 Lazy people like me never want to type "yes" when "y" will suffice.
@@ -318,11 +280,60 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 ;           ))
 
 (sacha/package-install 'color-theme)
-(use-package solarized-theme
-:ensure solarized-theme)
-(sacha/package-install 'zenburn-theme)
-(load-theme 'zenburn t)
+(use-package spacemacs
+:init
+(load-theme 'spacemacs-dark t))
+
 #+END_SRC
+
+#+RESULTS:
+
+** Mode line format
+
+Display a more compact mode line
+
+#+begin_src emacs-lisp :tangle no
+(use-package      smart-mode-line-powerline-theme
+    :ensure smart-mode-line-powerline-theme)
+  (use-package smart-mode-line
+    :ensure smart-mode-line
+    :init 
+    (progn
+    (setq sml/no-confirm-load-theme t)
+    (sml/setup)
+    (sml/apply-theme 'powerline))
+)
+
+#+end_src
+
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+:init (progn
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+))
+#+END_SRC
+
+#+RESULTS:
+: Could not load package smart-mode-line
+
+Hide minor modes I care less about:
+
+#+begin_src emacs-lisp
+(require 'diminish)
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "guide-key" '(diminish 'guide-key-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "guide-key" '(diminish 'guide-key-mode))
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
+(diminish 'visual-line-mode)
+#+end_src
+
+
+#+RESULTS:
+|
+
 ** Undo tree mode - visualize your undos and branches
 
 People often struggle with the Emacs undo model, where there's really no concept of "redo" - you simply undo the undo. 
