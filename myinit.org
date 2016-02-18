@@ -309,6 +309,7 @@ Display a more compact mode line
 
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
+:ensure t
 :init (progn
 (require 'spaceline-config)
 (spaceline-spacemacs-theme)
@@ -316,7 +317,6 @@ Display a more compact mode line
 #+END_SRC
 
 #+RESULTS:
-: Could not load package smart-mode-line
 
 Hide minor modes I care less about:
 
