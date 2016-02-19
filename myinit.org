@@ -543,6 +543,8 @@ narrowed."
                   ("\\.pdf\\'" . "evince %s")
                   ) org-file-apps ))
 
+
+(require 'ox-odt)
 #+END_SRC   
 
 #+RESULTS:
@@ -558,6 +560,7 @@ narrowed."
    (emacs-lisp . t)
    (scheme . t )
    (java . t )
+(C . t)
    (mongo . t )
    (ditaa . t)
    (dot . t)
