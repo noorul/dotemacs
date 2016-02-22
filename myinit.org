@@ -129,6 +129,16 @@ If REPOSITORY is specified, use that."
 
 
 #+end_src
+** iedit
+#+BEGIN_SRC emacs-lisp
+(use-package iedit
+:ensure t
+:init (progn (iedit-mode) ))
+
+#+END_SRC
+
+#+RESULTS:
+
 ** Expand Region
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
