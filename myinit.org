@@ -633,11 +633,21 @@ narrowed."
 ** reveal
 #+begin_src emacs-lisp
 (setq org-reveal-mathjax t)
-
 (use-package ox-reveal
 :ensure ox-reveal)
 
 #+end_src
+** org-complete
+#+BEGIN_SRC emacs-lisp
+(use-package org-ac
+:ensure t
+:init (progn
+(require 'org-ac)
+(org-ac/config-default)
+
+))
+
+#+END_SRC
 * latex
 #+begin_src emacs-lisp
 
