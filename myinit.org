@@ -21,6 +21,10 @@ to the end of the begin_src lines -- see the init.el section for
 an example 
 ** To install pcackages automatically use
 #+begin_src emacs-lisp :tangle no
+; usepackage notes
+; :init - do before loaded
+; :config after after loaded
+; : preface - not sure but it's there
   (use-package smart-mode-line
     :ensure smart-mode-line
     :init 
