@@ -532,7 +532,7 @@ narrowed."
   (custom-set-variables
 '(org-agenda-files (list "~/cloud/orgfiles/notes.org"
 "~/cloud/orgfiles/i.org"
-)))
+))
 '(org-default-notes-file (concat org-directory "/notes.org"))
 '(org-directory "~/cloud/orgfiles")
 '(org-export-html-postamble nil)
