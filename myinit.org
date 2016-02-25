@@ -247,24 +247,6 @@ If REPOSITORY is specified, use that."
 #+RESULTS:
 : t
 
-** Help - guide-key
-commented out for now
-
-It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
-
-#+begin_src emacs-lisp :tangle no
-;; (sacha/package-install 'guide-key)
-
-(use-package guide-key
-:ensure t
-  :config
-(progn
-  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c" "C-c p"))
-  (guide-key-mode 1)))  ; Enable guide-key-mode
-#+end_src
-
-#+RESULTS:
-: t
 
 ** Change "yes or no" to "y or n"
 
@@ -548,12 +530,14 @@ narrowed."
 ** Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
-'(org-agenda-files (quote ("~/cloud/orgfiles/")))
+'(org-agenda-files (list "~/cloud/orgfiles/notes.org"
+"~/cloud/orgfiles/i.org"
+)))
 '(org-default-notes-file (concat org-directory "/notes.org"))
 '(org-directory "~/cloud/orgfiles")
 '(org-export-html-postamble nil)
 '(org-hide-leading-stars t)
-'(org-startup-folded (quote content))
+'(org-startup-folded (quote overview))
 '(org-startup-indented t)
    )
 
@@ -561,12 +545,14 @@ narrowed."
         (append '(
                   ("\\.pdf\\'" . "evince %s")
                   ) org-file-apps ))
-
+ 
+(global-set-key "\C-ca" 'org-agenda)
 
 (require 'ox-odt)
 #+END_SRC   
 
 #+RESULTS:
+| org-startup-indented | t |
 ** Babel
 #+begin_src emacs-lisp
 (sacha/package-install 'ob-mongo)
@@ -668,7 +654,13 @@ narrowed."
 ** Misc
 #+begin_src emacs-lisp
 (setq-default tab-width 2)
+
+(use-package ggtags
+:ensure t)
 #+end_src
+
+#+RESULTS:
+
 ** smartparens
 #+BEGIN_SRC emacs-lisp
 
