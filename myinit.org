@@ -423,8 +423,6 @@ it's out of the way here
 :bind (
 ("C-'" . avy-goto-char)
 ("C-:" . avy-goto-char-2)
-()
-
 )
 :config
 (progn
