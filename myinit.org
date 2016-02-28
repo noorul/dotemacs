@@ -650,8 +650,12 @@ narrowed."
 (setq org-reveal-mathjax t)
 (use-package ox-reveal
 :ensure ox-reveal)
-
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 #+end_src
+
+#+RESULTS:
+: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js
+
 ** org-complete
 #+BEGIN_SRC emacs-lisp
 (use-package org-ac
