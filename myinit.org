@@ -673,7 +673,7 @@ narrowed."
 #+RESULTS:
 
 ** smartparens
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp 
 
 (use-package smartparens
 :ensure smartparens
@@ -807,6 +807,7 @@ narrowed."
 
 (use-package js2-mode
 :ensure t
+:ensure ac-js2
 :init
 (progn
 (add-hook 'js-mode-hook 'js2-minor-mode)
