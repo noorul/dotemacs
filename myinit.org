@@ -9,7 +9,7 @@ shared tons of really awesome emacs stuff and I'd encourage everyone
 to google her and check out her work.
 
 ** First time
-use M-x package-refresh-contents the first time you load this, then
+use **M-x package-refresh-contents** the first time you load this, then
 exit emacs and start again.
 
 Also do this when you change package sources.
@@ -21,26 +21,23 @@ to the end of the begin_src lines -- see the init.el section for
 an example 
 ** To install pcackages automatically use
 #+begin_src emacs-lisp :tangle no
-; usepackage notes
-; :init - do before loaded
-; :config after after loaded
-; : preface - not sure but it's there
+
+  ;; usepackage notes
+  ;; :init - do before loaded
+  ;; :config after after loaded
+  ;; : preface - not sure but it's there
   (use-package smart-mode-line
     :ensure smart-mode-line
     :init 
     (progn
       (setq sml/no-confirm-load-theme t)
       (sml/setup)
-      (sml/apply-theme 'powerline)
-      ))
+      (sml/apply-theme 'powerline)))
 #+end_src
 
-* TO INSTALL LATER
-- Multiple Cursors
-- Expand
+* Packages TO LOOK AT OR INSTALL LATER
 - Avy - need to config hot key for ace-jump equiv
 - Hydra - installed look at config
-- endless parens dwim narrow
 * The init.el
 
 The content between the begin_src and end_src should
@@ -52,11 +49,9 @@ this file
 
 #+begin_src emacs-lisp :tangle no
   (package-initialize nil)
-(add-to-list 'load-path "~/.emacs.d/packages/lisp")
+  (add-to-list 'load-path "~/.emacs.d/packages/lisp")
   (require 'package)
 
-  ;(add-to-list 'package-archives
-  ;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives
@@ -71,12 +66,18 @@ this file
 
   (custom-set-variables
    '(inhibit-startup-screen t))
-#+end_#+begin_src language
-
-#+end_src
+  #+end_src
 
 * Basic Configuration and setup
-** Set initial size
+** Set up use-package
+#+BEGIN_SRC emacs-lisp
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+#+END_SRC
+
+** Set initial size -- this isn't tangled right now
 #+BEGIN_SRC emacs-lisp :tangle no
 (set-face-attribute 'default nil':height 150)
 (setq default-frame-alist
@@ -95,26 +96,12 @@ Stuff we don't want on github.
   (setq user-full-name "Mike Zamansky"
         user-mail-address "zamansky@gmail.com")
 #+end_src
-** Install Package routine
-
-Taken from Sacha Chua's config.
-
-#+begin_src emacs-lisp
-(defun sacha/package-install (package &optional repository)
-  "Install PACKAGE if it has not yet been installed.
-If REPOSITORY is specified, use that."
-  (unless (package-installed-p package)
-    (let ((package-archives (if repository
-                                (list (assoc repository package-archives))
-                              package-archives)))
-    (package-install package))))
-(sacha/package-install 'use-package)
-(require 'use-package)
-#+end_src
 * General Configuration
 ** Misc interface settings
+
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
+
 ; periodically automatically revert to what's on disk 
 ; this makes it easier to keep files using btsync or dropbox
 ; in sync since I frequently forget to save them
@@ -145,19 +132,16 @@ If REPOSITORY is specified, use that."
 
 ** Expand Region
 #+BEGIN_SRC emacs-lisp
-(use-package expand-region
-:ensure t
-:config
-(progn
-(global-set-key (kbd "C-=") 'er/expand-region)
-)
-)
+  (use-package expand-region
+  :ensure t
+  :config
+  (progn (global-set-key (kbd "C-=") 'er/expand-region)))
 
 #+END_SRC
 
 #+RESULTS:
 
-** Hydra
+** Hydra - need to re-evaluate this
 #+begin_src emacs-lisp
   (use-package hydra 
   :ensure hydra
@@ -250,8 +234,6 @@ If REPOSITORY is specified, use that."
 
 #+RESULTS:
 : t
-
-
 ** Change "yes or no" to "y or n"
 
 Lazy people like me never want to type "yes" when "y" will suffice.
@@ -275,7 +257,8 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 ;           (color-theme-subtle-hacker)
 ;           ))
 
-(sacha/package-install 'color-theme)
+(use-package color-theme
+:ensure t)
 (use-package spacemacs-theme
 :ensure t
 :init
@@ -338,8 +321,9 @@ People often struggle with the Emacs undo model, where there's really no concept
 This lets you use =C-x u= (=undo-tree-visualize=) to visually walk through the changes you've made, undo back to a certain point (or redo), and go down different branches.
 
 #+begin_src emacs-lisp
-(sacha/package-install 'undo-tree)
+
   (use-package undo-tree
+  :ensure t
     :init
     (progn
       (global-undo-tree-mode)
@@ -443,7 +427,6 @@ Handy way of getting back to previous places.
 
 ** Ace-windows
 #+BEGIN_SRC emacs-lisp
-(sacha/package-install 'ace-window)
 (use-package ace-window
 :ensure t
 :init 
@@ -471,8 +454,8 @@ use =C-y= and =M-y= when going backwards in the kill ring, but I never
 quite remember how to go forward, so browse-kill-ring makes it easier.
 
 #+begin_src emacs-lisp
-  (sacha/package-install 'browse-kill-ring)
   (use-package browse-kill-ring
+:ensure t
     :init 
     (progn 
       (browse-kill-ring-default-keybindings) ;; M-y
@@ -483,8 +466,7 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 : t
 ** visual-regexp
 #+begin_src emacs-lisp
-(sacha/package-install 'visual-regexp)
-(use-package visual-regexp)
+(use-package visual-regexp :ensure t)
 #+end_src
 ** Narrow and widen DWIM (endless parens)
 #+BEGIN_SRC emacs-lisp
@@ -570,9 +552,9 @@ narrowed."
 | org-startup-indented | t |
 ** Babel
 #+begin_src emacs-lisp
-(sacha/package-install 'ob-mongo)
+
 (use-package ob-mongo
-  :init
+:ensure t  :init
 (progn
 (org-babel-do-load-languages
  'org-babel-load-languages
