@@ -432,7 +432,7 @@ Handy way of getting back to previous places.
 :init 
 (progn
 (global-set-key [remap other-window] 'ace-window)
-
+(setq aw-scope 'frame)
 (custom-set-faces
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0)))))
@@ -651,7 +651,6 @@ narrowed."
 #+END_SRC
 * latex
 #+begin_src emacs-lisp
-
 (use-package tex
 :ensure auctex)
 
