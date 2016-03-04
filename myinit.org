@@ -370,8 +370,11 @@ Flashes cursor when you scroll
 ** ibuffer 
 bind to ibuffer rather than list buffers
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-x C-b") 'ibuffer-other-window)
+(defalias 'list-buffers 'ibuffer-other-window) ; make ibuffer default
 #+END_SRC
+
+#+RESULTS:
+: list-buffers
 
 
 ** Counsel
