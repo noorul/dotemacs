@@ -367,6 +367,13 @@ Flashes cursor when you scroll
 #+RESULTS:
 
 * Navigation
+** ibuffer 
+bind to ibuffer rather than list buffers
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-b") 'ibuffer-other-window)
+#+END_SRC
+
+
 ** Counsel
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
