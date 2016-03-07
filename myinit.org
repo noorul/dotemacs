@@ -914,3 +914,9 @@ opening 4clojure questions"
 
 #+RESULTS:
 : t
+** Try - try packages only for this session
+#+BEGIN_SRC emacs-lisp
+(use-package try
+:ensure t)
+
+#+END_SRC
