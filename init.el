@@ -38,10 +38,11 @@
  '(org-startup-indented t)
  '(package-selected-packages
 	 (quote
-		(org autopair paredit-everywhere paredit org-present windsize try org-ac on-screen iedit volatile-highlights evil evil-surround evil-matchit highlight-parentheses rainbow-mode org-pandoc ox-pandoc ox-rst spacemacs spaceline spacemacs-theme solarized-theme ox-twbs fireplace cdnjs 4clojure clojure-snippets org-bullets zenburn-theme yasnippet which-key web-mode visual-regexp use-package undo-tree tern-auto-complete swiper smartparens smart-mode-line-powerline-theme rainbow-delimiters projectile ox-reveal ob-mongo markdown-mode magit live-py-mode js2-mode jedi hydra hungry-delete guide-key gnuplot flycheck-pyflakes expand-region edit-server color-theme browse-kill-ring beacon auctex aggressive-indent ace-window ac-cider))))
+		(semi org-alert org autopair paredit-everywhere paredit org-present windsize try org-ac on-screen iedit volatile-highlights evil evil-surround evil-matchit highlight-parentheses rainbow-mode org-pandoc ox-pandoc ox-rst spacemacs spaceline spacemacs-theme solarized-theme ox-twbs fireplace cdnjs 4clojure clojure-snippets org-bullets zenburn-theme yasnippet which-key web-mode visual-regexp use-package undo-tree tern-auto-complete swiper smartparens smart-mode-line-powerline-theme rainbow-delimiters projectile ox-reveal ob-mongo markdown-mode magit live-py-mode js2-mode jedi hydra hungry-delete guide-key gnuplot flycheck-pyflakes expand-region edit-server color-theme browse-kill-ring beacon auctex aggressive-indent ace-window ac-cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+(put 'set-goal-column 'disabled nil)
