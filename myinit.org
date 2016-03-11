@@ -707,6 +707,9 @@ narrowed."
 
 #+END_SRC
 
+#+RESULTS:
+: make-capture-frame
+
 * latex
 #+begin_src emacs-lisp
 (use-package tex
