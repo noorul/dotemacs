@@ -664,43 +664,45 @@ narrowed."
 #+END_SRC
 ** org capture and agenda stuff
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c c") 'org-capture)
 
 
-(setq org-agenda-files (list "~/cloud/orgfiles/i.org"
-"~/cloud/orgfiles/schedule.org"))
+  (setq org-agenda-files (list "~/cloud/orgfiles/i.org"
+                               "~/cloud/orgfiles/schedule.org"))
 
 
- (setq org-capture-templates
- '(("a" "Appointment" entry (file+headline  "~/cloud/orgfiles/schedule.org" "Appointments")
-             "* TODO %?\nSCHEDULED: %^T \n %i\n")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-             "* %?\nEntered on %U\n  %i\n  %a")))
-             
+  (setq org-capture-templates
+        '(("a" "Appointment" entry (file+headline  "~/cloud/orgfiles/schedule.org" "Appointments")
+           "* TODO %?\nSCHEDULED: %^T \n %i\n")
+          ("n" "Note" entry (file+headline "~/cloud/orgfiles/notes.org" "Notes")
+           "* Note %?\n%t")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
 
-(defadvice org-capture-finalize 
-  (after delete-capture-frame activate)  
-   "Advise capture-finalize to close the frame"  
-   (if (equal "capture" (frame-parameter nil 'name))  
-       (delete-frame)))
 
-(defadvice org-capture-destroy 
-  (after delete-capture-frame activate)  
-   "Advise capture-destroy to close the frame"  
-   (if (equal "capture" (frame-parameter nil 'name))  
-       (delete-frame)))  
+  (defadvice org-capture-finalize 
+      (after delete-capture-frame activate)  
+    "Advise capture-finalize to close the frame"  
+    (if (equal "capture" (frame-parameter nil 'name))  
+        (delete-frame)))
 
-(use-package noflet
-:ensure t )
-(defun make-capture-frame ()
-         "Create a new frame and run org-capture."
-         (interactive)
-         (make-frame '((name . "capture")))
-         (select-frame-by-name "capture")
-         (delete-other-windows)
-         (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-           (org-capture)))
-;;emacsclient -ne  '(make-capture-frame)'
+  (defadvice org-capture-destroy 
+    (after delete-capture-frame activate)  
+     "Advise capture-destroy to close the frame"  
+     (if (equal "capture" (frame-parameter nil 'name))  
+         (delete-frame)))  
+
+  (use-package noflet
+  :ensure t )
+  (defun make-capture-frame ()
+           "Create a new frame and run org-capture."
+           (interactive)
+           (make-frame '((name . "capture")))
+           (select-frame-by-name "capture")
+           (delete-other-windows)
+           (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+             (org-capture)))
+  ;;emacsclient -ne  '(make-capture-frame)'
 
 #+END_SRC
 
@@ -951,6 +953,10 @@ opening 4clojure questions"
 		(lambda () (interactive) (find-file "~/cloud/orgfiles/cstuy.org")))
 
 #+end_src
+
+#+RESULTS:
+| lambda | nil | (interactive) | (find-file ~/cloud/orgfiles/cstuy.org) |
+
 * Misc			  
 ** edit-server for edit with emacs
 #+begin_src emacs-lisp
