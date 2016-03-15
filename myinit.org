@@ -675,7 +675,9 @@ narrowed."
         '(("a" "Appointment" entry (file+headline  "~/cloud/orgfiles/schedule.org" "Appointments")
            "* TODO %?\nSCHEDULED: %^T \n %i\n")
           ("n" "Note" entry (file+headline "~/cloud/orgfiles/notes.org" "Notes")
-           "* Note %?\n%t")
+           "* Note %?\n%T")
+          ("l" "Link" entry (file+headline "~/cloud/orgfiles/i.org" "Links")
+           "* %? %^L\n%T" :prepend)
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
 
