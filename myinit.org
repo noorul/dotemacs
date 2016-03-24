@@ -715,7 +715,7 @@ narrowed."
 #+BEGIN_SRC emacs-lisp
 (use-package org-gcal
 	:ensure t
-	:init (progn
+	:config (progn
 					(setq org-gcal-client-id "37530897387-u4evb7iem349bq05clt7rk5mn6c14efp.apps.googleusercontent.com"
 								org-gcal-client-secret "Cp5ryxyvSaW1YQl8Zm7VjrD-"
 								org-gcal-file-alist '(("zamansky@gmail.com" .  "~/cloud/orgfiles/schedule.org")
@@ -724,6 +724,10 @@ narrowed."
 
 
 #+END_SRC
+
+#+RESULTS:
+: t
+
 * latex
 #+begin_src emacs-lisp
 (use-package tex
