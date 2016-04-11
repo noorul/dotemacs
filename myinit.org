@@ -36,7 +36,6 @@ an example
 #+end_src
 
 * Packages TO LOOK AT OR INSTALL LATER
-- Avy - need to config hot key for ace-jump equiv
 - Hydra - installed look at config
 * The init.el
 
@@ -1024,6 +1023,13 @@ opening 4clojure questions"
 #+RESULTS:
 | lambda | nil | (interactive) | (find-file ~/cloud/orgfiles/cstuy.org) |
 
+* Avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t
+  :bind (("M-s" . avy-goto-word-1)))
+
+#+END_SRC
 * Misc			  
 ** edit-server for edit with emacs
 #+begin_src emacs-lisp
