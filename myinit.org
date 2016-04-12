@@ -662,7 +662,9 @@ narrowed."
 
 #+END_SRC
 ** Hydra for agenda keys (v) in agenda view
-#+BEGIN_SRC emacs-lisp
+This doesn't seem to work
+#+BEGIN_SRC emacs-lisp :tangle no
+
 (define-key org-agenda-mode-map
     "v" 'hydra-org-agenda-view/body)
 
