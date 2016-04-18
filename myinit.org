@@ -140,6 +140,17 @@ Stuff we don't want on github.
 
 #+RESULTS:
 
+** fill column indicator
+#+BEGIN_SRC emacs-lisp
+(use-package fill-column-indicator
+:ensure t
+:init (progn
+(setq fci-fill-column 80)
+))
+#+END_SRC
+
+#+RESULTS:
+
 ** Hydra - need to re-evaluate this
 #+begin_src emacs-lisp
   (use-package hydra 
@@ -152,6 +163,7 @@ Stuff we don't want on github.
              "toggle"
              ("a" abbrev-mode "abbrev")
              ("d" toggle-debug-on-error "debug")
+             ("c" fci-mode "fCi")
              ("f" auto-fill-mode "fill")
              ("t" toggle-truncate-lines "truncate")
              ("w" whitespace-mode "whitespace")
