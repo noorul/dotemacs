@@ -145,7 +145,7 @@ Stuff we don't want on github.
 (use-package fill-column-indicator
 :ensure t
 :init (progn
-(setq fci-fill-column 80)
+(setq fci-rule-column 90)
 ))
 #+END_SRC
 
