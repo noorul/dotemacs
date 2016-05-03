@@ -799,13 +799,21 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 ;; Local file that gets events from the server
 (setq org-caldav-inbox "~/cloud/orgfiles/fromowncloud.org")
-(setq org-caldav-files (list  "~/cloud/orgfiles/i.org"
+(setq org-caldav-files (list  ;; "~/cloud/orgfiles/i.org"
                                "~/cloud/orgfiles/schedule.org"))
 
 
 ;; Please make sure to set your correct timezone here
 (setq org-icalendar-timezone "America/New_York")
 ))
+
+;; figure this out later
+;;(setq org-caldav-calendars
+;;  '((:calendar-id "personal" :files ("~/cloud/orgfiles/schedule.org")
+;;     :inbox "~/cloud/orgfiles/fromowncloud.org")
+;;    (:calendar-id "tasks"
+;;     :files ("~/cloud/orgfiles/i.org")
+;;     :inbox "~/cloud/orgfiles/fromowncloud.org")))
 
 #+END_SRC
 
