@@ -798,9 +798,9 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 
 ;; Local file that gets events from the server
-(setq org-caldav-inbox "/home/zamansky/cloud/orgfiles/fromowncloud.org")
+(setq org-caldav-inbox "~/cloud/orgfiles/fromowncloud.org")
 (setq org-caldav-files (list  "~/cloud/orgfiles/i.org"
-                               "/home/zamansky/cloud/orgfiles/schedule.org"))
+                               "~/cloud/orgfiles/schedule.org"))
 
 
 ;; Please make sure to set your correct timezone here
