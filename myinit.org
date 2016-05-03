@@ -737,12 +737,13 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 
   (setq org-agenda-files (list "~/cloud/orgfiles/i.org"
-                               "~/cloud/orgfiles/schedule.org"))
+                               "~/cloud/orgfiles/schedule.org"
+"~/cloud/orgfiles/fromowncloud.org"))
 
 
   (setq org-capture-templates
         '(("a" "Appointment" entry (file+headline  "~/cloud/orgfiles/schedule.org" "Appointments")
-           "* TODO %?\nDEADLINE: %^T \n %i\n")
+           "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
           ("n" "Note" entry (file+headline "~/cloud/orgfiles/notes.org" "Notes")
            "* Note %?\n%T")
           ("l" "Link" entry (file+headline "~/cloud/orgfiles/i.org" "Links")
@@ -780,9 +781,31 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 #+RESULTS:
 : make-capture-frame
 
-** org-gcal
+** org CalDAV
 #+BEGIN_SRC emacs-lisp
-(load-file  "~/cloud/shared/org-gcal.el")
+
+(use-package org-caldav 
+:ensure t
+:config (progn
+(require 'org-caldav)
+
+;; The CalDAV URL with your full and primary email address at the end.
+(setq org-caldav-url "http://owncloud.zamansky.net/remote.php/caldav/calendars/zamansky")
+
+
+;; The name of your calendar, typically "Calendar" or similar
+(setq org-caldav-calendar-id "personal")
+
+
+;; Local file that gets events from the server
+(setq org-caldav-inbox "/home/zamansky/cloud/orgfiles/fromowncloud.org")
+(setq org-caldav-files (list  "~/cloud/orgfiles/i.org"
+                               "/home/zamansky/cloud/orgfiles/schedule.org"))
+
+
+;; Please make sure to set your correct timezone here
+(setq org-icalendar-timezone "America/New_York")
+))
 
 #+END_SRC
 
