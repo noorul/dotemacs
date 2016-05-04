@@ -277,7 +277,7 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 
 (use-package zenburn-theme
 :ensure t
-:init (load-theme 'zenburn))
+:init (load-theme 'zenburn t) )
 #+END_SRC
 
 #+RESULTS:
@@ -891,7 +891,6 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 (ac-config-default)
 (global-auto-complete-mode t)
 ))
-
 
 #+END_SRC
 
