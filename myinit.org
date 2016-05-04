@@ -270,11 +270,14 @@ Lazy people like me never want to type "yes" when "y" will suffice.
 
 (use-package color-theme
 :ensure t)
-(use-package spacemacs-theme
-:ensure t
-:init
-(load-theme 'spacemacs-dark t))
+;(use-package spacemacs-theme
+;:ensure t
+;:init
+;(load-theme 'spacemacs-dark t))
 
+(use-package zenburn-theme
+:ensure t
+:init (load-theme 'zenburn))
 #+END_SRC
 
 #+RESULTS:
