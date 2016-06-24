@@ -749,8 +749,10 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
            "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
           ("n" "Note" entry (file+headline "~/cloud/orgfiles/notes.org" "Notes")
            "* Note %?\n%T")
-          ("l" "Link" entry (file+headline "~/cloud/orgfiles/i.org" "Links")
-           "* %? %^L\n%T" :prepend)
+           ("l" "Link" entry (file+headline "~/cloud/orgfiles/links.org" "Links")
+           "* %? %^L\n%T" :prepend t)
+          ("b" "Blog idea" entry (file+headline "~/cloud/orgfiles/i.org" "Blog Topics")
+           "* %?\n%T" :prepend t)
           ("j" "Journal" entry (file+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
 
@@ -897,7 +899,7 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 #+RESULTS:
 
 ** yasnippets
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package yasnippet
 :ensure t
 :init
