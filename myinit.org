@@ -1059,6 +1059,9 @@ opening 4clojure questions"
 (global-set-key (kbd "\e\ei")
 		(lambda () (interactive) (find-file "~/cloud/orgfiles/i.org")))
 
+(global-set-key (kbd "\e\eb")
+		(lambda () (interactive) (find-file "~/cloud/orgfiles/links.org")))
+
 (global-set-key (kbd "\e\ea")
 		(lambda () (interactive) (find-file "~/cloud/orgfiles/apcs.org")))
 
