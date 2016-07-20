@@ -552,7 +552,7 @@ narrowed."
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
 '(org-default-notes-file (concat org-directory "/notes.org"))
-'(org-directory "~/cloud/orgfiles")
+'(org-directory "~/Dropbox/orgfiles")
 '(org-export-html-postamble nil)
 '(org-hide-leading-stars t)
 '(org-startup-folded (quote overview))
@@ -739,21 +739,24 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
   (global-set-key (kbd "C-c c") 'org-capture)
 
 
-  (setq org-agenda-files (list "~/cloud/orgfiles/i.org"
-                               "~/cloud/orgfiles/schedule.org"
-"~/cloud/orgfiles/fromowncloud.org"))
+  (setq org-agenda-files (list "~/Dropbox/orgfiles/i.org"
+                               "~/Dropbox/orgfiles/schedule.org"
+"~/Dropbox/orgfiles/fromowncloud.org"))
 
 
   (setq org-capture-templates
-        '(("a" "Appointment" entry (file+headline  "~/cloud/orgfiles/schedule.org" "Appointments")
+        '(("a" "Appointment" entry (file+headline  "~/Dropbox/orgfiles/schedule.org" "Appointments")
            "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-          ("n" "Note" entry (file+headline "~/cloud/orgfiles/notes.org" "Notes")
+          ("n" "Note" entry (file+headline "~/Dropbox/orgfiles/notes.org" "Notes")
            "* Note %?\n%T")
-           ("l" "Link" entry (file+headline "~/cloud/orgfiles/links.org" "Links")
-           "* %? %^L\n%T" :prepend t)
-          ("b" "Blog idea" entry (file+headline "~/cloud/orgfiles/i.org" "Blog Topics")
+           ("l" "Link" entry (file+headline "~/Dropbox/orgfiles/links.org" "Links")
+           "* %? %^L %^g \n%T" :prepend t)
+          ("b" "Blog idea" entry (file+headline "~/Dropbox/orgfiles/i.org" "Blog Topics")
            "* %?\n%T" :prepend t)
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ("t" "To Do Item" entry (file+headline "~/Dropbox/orgfiles/i.org" "To Do Items")
+           "* %?\n%T" :prepend t)
+
+          ("j" "Journal" entry (file+datetree "~/Dropbox/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
 
 
@@ -803,9 +806,9 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 
 ;; Local file that gets events from the server
-(setq org-caldav-inbox "~/cloud/orgfiles/fromowncloud.org")
-(setq org-caldav-files (list  ;; "~/cloud/orgfiles/i.org"
-                               "~/cloud/orgfiles/schedule.org"))
+(setq org-caldav-inbox "~/Dropbox/orgfiles/fromowncloud.org")
+(setq org-caldav-files (list  ;; "~/Dropbox/orgfiles/i.org"
+                               "~/Dropbox/orgfiles/schedule.org"))
 
 
 ;; Please make sure to set your correct timezone here
@@ -814,11 +817,11 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 ;; figure this out later
 ;;(setq org-caldav-calendars
-;;  '((:calendar-id "personal" :files ("~/cloud/orgfiles/schedule.org")
-;;     :inbox "~/cloud/orgfiles/fromowncloud.org")
+;;  '((:calendar-id "personal" :files ("~/Dropbox/orgfiles/schedule.org")
+;;     :inbox "~/Dropbox/orgfiles/fromowncloud.org")
 ;;    (:calendar-id "tasks"
-;;     :files ("~/cloud/orgfiles/i.org")
-;;     :inbox "~/cloud/orgfiles/fromowncloud.org")))
+;;     :files ("~/Dropbox/orgfiles/i.org")
+;;     :inbox "~/Dropbox/orgfiles/fromowncloud.org")))
 
 #+END_SRC
 
@@ -1057,23 +1060,23 @@ opening 4clojure questions"
 
 
 (global-set-key (kbd "\e\ei")
-		(lambda () (interactive) (find-file "~/cloud/orgfiles/i.org")))
+		(lambda () (interactive) (find-file "~/Dropbox/orgfiles/i.org")))
 
 (global-set-key (kbd "\e\eb")
-		(lambda () (interactive) (find-file "~/cloud/orgfiles/links.org")))
+		(lambda () (interactive) (find-file "~/Dropbox/orgfiles/links.org")))
 
 (global-set-key (kbd "\e\ea")
-		(lambda () (interactive) (find-file "~/cloud/orgfiles/apcs.org")))
+		(lambda () (interactive) (find-file "~/Dropbox/orgfiles/apcs.org")))
 
 (global-set-key (kbd "\e\es")
-		(lambda () (interactive) (find-file "~/cloud/orgfiles/softdev.org")))
+		(lambda () (interactive) (find-file "~/Dropbox/orgfiles/softdev.org")))
 (global-set-key (kbd "\e\ec")
-		(lambda () (interactive) (find-file "~/cloud/orgfiles/cstuy.org")))
+		(lambda () (interactive) (find-file "~/Dropbox/orgfiles/cstuy.org")))
 
 #+end_src
 
 #+RESULTS:
-| lambda | nil | (interactive) | (find-file ~/cloud/orgfiles/cstuy.org) |
+| lambda | nil | (interactive) | (find-file ~/Dropbox/orgfiles/cstuy.org) |
 
 * Avy
 #+BEGIN_SRC emacs-lisp
@@ -1117,5 +1120,5 @@ opening 4clojure questions"
 #+END_SRC
 * Mu4e
 #+BEGIN_SRC emacs-lisp
-(load-file  "~/cloud/shared/mu4econfig.el")
+(load-file  "~/Dropbox/shared/mu4econfig.el")
 #+END_SRC
