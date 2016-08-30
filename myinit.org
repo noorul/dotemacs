@@ -828,6 +828,16 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 #+RESULTS:
 : t
 
+** org and calfw
+#+BEGIN_SRC emacs-lisp
+(use-package calfw
+:ensure t
+:config
+(require 'calfw) 
+(require 'calfw-org)
+)
+
+#+END_SRC
 * latex
 #+begin_src emacs-lisp
 (use-package tex
