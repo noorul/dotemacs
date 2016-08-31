@@ -835,6 +835,7 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 :config
 (require 'calfw) 
 (require 'calfw-org)
+(setq cfw:org-overwrite-default-keybinding t)
 )
 
 #+END_SRC
