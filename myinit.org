@@ -18,7 +18,7 @@ You can copy sections to your own myinit.org but if you want to use
 this and "comment out" chunks, the easiest w
 ay is to add ":tangle no"
 to the end of the begin_src lines -- see the init.el section for 
-an example 
+an examplqe 
 ** To install pcackages automatically use
 #+begin_src emacs-lisp :tangle no
 
@@ -836,9 +836,30 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 (require 'calfw) 
 (require 'calfw-org)
 (setq cfw:org-overwrite-default-keybinding t)
+(require 'calfw-ical)
+
+(defun calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "Green")  ; orgmode source
+    (cfw:ical-create-source "gcal" "https://calendar.google.com/calendar/ical/devorah.zamansky%40gmail.com/private-980b7eb88e2eba32ac2dca5f83272ba0/basic.ics" "IndianRed") ; devorah calender
+    (cfw:ical-create-source "gcal" "https://calendar.google.com/calendar/ical/zamansky%40gmail.com/private-1694a043c10bfb88aebf3ee190785e00/basic.ics" "IndianRed") ; google calendar ICS
+   ))) 
+
+
 )
+(use-package calfw-gcal
+:ensure t
+:config
+(require 'calfw-gcal))
 
 #+END_SRC
+
+#+RESULTS:
+: t
+
 * latex
 #+begin_src emacs-lisp
 (use-package tex
