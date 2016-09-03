@@ -978,6 +978,8 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 #+end_src
 ** Python
 #+BEGIN_SRC emacs-lisp
+(setq py-python-command "python3")
+
 (use-package jedi
 :ensure t
 :init
@@ -985,6 +987,9 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'jedi:ac-setup)
 ))
+
+
+
 #+END_SRC
 
 #+RESULTS:
