@@ -979,6 +979,7 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 ** Python
 #+BEGIN_SRC emacs-lisp
 (setq py-python-command "python3")
+(setq python-shell-interpreter "python3")
 
 (use-package jedi
 :ensure t
