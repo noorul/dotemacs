@@ -1147,6 +1147,17 @@ opening 4clojure questions"
                 #'endless/fill-or-unfill)
 
 #+END_SRC
+** dired+
+#+BEGIN_SRC emacs-lisp
+  (use-package dired+
+    :ensure t
+    :config (require 'diredp)
+    )
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * Mu4e
 #+BEGIN_SRC emacs-lisp
 (load-file  "~/Dropbox/shared/mu4econfig.el")
