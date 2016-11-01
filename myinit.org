@@ -740,10 +740,8 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 
   (setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org"
-  "~/Dropbox/orgfiles/i.org"
-                               "~/Dropbox/orgfiles/schedule.org"
-
-))
+                               "~/Dropbox/orgfiles/i.org"
+                               "~/Dropbox/orgfiles/schedule.org"))
 
 
   (setq org-capture-templates
@@ -785,7 +783,7 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
            (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
              (org-capture)))
   ;;emacsclient -ne  '(make-capture-frame)'
-
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 #+END_SRC
 
 #+RESULTS:

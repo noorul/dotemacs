@@ -28,9 +28,6 @@
  '(custom-safe-themes
 	 (quote
 		("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "f024aea709fb96583cf4ced924139ac60ddca48d25c23a9d1cd657a2cf1e4728" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
- '(org-agenda-files
-	 (quote
-		("~/Dropbox/orgfiles/i.org" "~/Dropbox/orgfiles/schedule.org")))
  '(org-default-notes-file (concat org-directory "/notes.org"))
  '(org-directory "~/Dropbox/orgfiles")
  '(org-export-html-postamble nil)
