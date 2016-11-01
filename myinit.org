@@ -739,13 +739,15 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
   (global-set-key (kbd "C-c c") 'org-capture)
 
 
-  (setq org-agenda-files (list "~/Dropbox/orgfiles/i.org"
+  (setq org-agenda-files (list "~/Dropbox/orgfiles/gcal.org"
+  "~/Dropbox/orgfiles/i.org"
                                "~/Dropbox/orgfiles/schedule.org"
-"~/Dropbox/orgfiles/fromowncloud.org"))
+
+))
 
 
   (setq org-capture-templates
-        '(("a" "Appointment" entry (file+headline  "~/Dropbox/orgfiles/schedule.org" "Appointments")
+        '(("a" "Appointment" entry (file+headline  "~/Dropbox/orgfiles/gcal.org" "Appointments")
            "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
           ("n" "Note" entry (file+headline "~/Dropbox/orgfiles/notes.org" "Notes")
            "* Note %?\n%T")
@@ -788,45 +790,6 @@ _y_: ?y? year       _q_: quit          _L__l__c_: ?l?"
 
 #+RESULTS:
 : make-capture-frame
-
-** org CalDAV
-#+BEGIN_SRC emacs-lisp
-
-(use-package org-caldav 
-:ensure t
-:config (progn
-(require 'org-caldav)
-
-;; The CalDAV URL with your full and primary email address at the end.
-(setq org-caldav-url "http://owncloud.zamansky.net/remote.php/caldav/calendars/zamansky")
-
-
-;; The name of your calendar, typically "Calendar" or similar
-(setq org-caldav-calendar-id "personal")
-
-
-;; Local file that gets events from the server
-(setq org-caldav-inbox "~/Dropbox/orgfiles/fromowncloud.org")
-(setq org-caldav-files (list  ;; "~/Dropbox/orgfiles/i.org"
-                               "~/Dropbox/orgfiles/schedule.org"))
-
-
-;; Please make sure to set your correct timezone here
-(setq org-icalendar-timezone "America/New_York")
-))
-
-;; figure this out later
-;;(setq org-caldav-calendars
-;;  '((:calendar-id "personal" :files ("~/Dropbox/orgfiles/schedule.org")
-;;     :inbox "~/Dropbox/orgfiles/fromowncloud.org")
-;;    (:calendar-id "tasks"
-;;     :files ("~/Dropbox/orgfiles/i.org")
-;;     :inbox "~/Dropbox/orgfiles/fromowncloud.org")))
-
-#+END_SRC
-
-#+RESULTS:
-: t
 
 ** org and calfw
 #+BEGIN_SRC emacs-lisp
@@ -1151,7 +1114,7 @@ opening 4clojure questions"
 #+BEGIN_SRC emacs-lisp
   (use-package dired+
     :ensure t
-    :config (require 'diredp)
+    :config (require 'dired+)
     )
 #+END_SRC
 
