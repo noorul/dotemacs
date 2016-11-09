@@ -1118,8 +1118,14 @@ opening 4clojure questions"
 #+RESULTS:
 : t
 
-* Mu4e
+* Load Mu4e config and other local files
 #+BEGIN_SRC emacs-lisp
-(load-file  "~/Dropbox/shared/mu4econfig.el")
-(load-file  "~/Dropbox/shared/not-for-github.el")
+(defun load-if-exists (f)
+""
+(if (file-readable-p f) (load-file f))
+)
+(load-if-exists  "~/Dropbox/shared/mu4econfig.el")
+(load-if-exists "~/Dropbox/shared/tempstuff.el")
+(load-if-exists "~/Dropbox/shared/not-for-github.el")
 #+END_SRC
+
