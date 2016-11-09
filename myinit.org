@@ -1121,4 +1121,5 @@ opening 4clojure questions"
 * Mu4e
 #+BEGIN_SRC emacs-lisp
 (load-file  "~/Dropbox/shared/mu4econfig.el")
+(load-file  "~/Dropbox/shared/not-for-github.el")
 #+END_SRC
