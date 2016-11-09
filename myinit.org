@@ -395,9 +395,15 @@ bind to ibuffer rather than list buffers
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
 :ensure t
-)
+:bind
+  (("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line)))
 
 #+END_SRC
+
+#+RESULTS:
+
 ** Swiper
 #+begin_src emacs-lisp
 (use-package swiper
@@ -477,7 +483,7 @@ paste the second-to-the-last item you cut, and so on. I remember to
 use =C-y= and =M-y= when going backwards in the kill ring, but I never
 quite remember how to go forward, so browse-kill-ring makes it easier.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package browse-kill-ring
 :ensure t
     :init 
@@ -487,7 +493,6 @@ quite remember how to go forward, so browse-kill-ring makes it easier.
 #+end_src
 
 #+RESULTS:
-: t
 ** visual-regexp
 #+begin_src emacs-lisp
 (use-package visual-regexp :ensure t)
@@ -1117,6 +1122,8 @@ opening 4clojure questions"
 
 #+RESULTS:
 : t
+
+** Kill ring Stuff
 
 * Load Mu4e config and other local files
 #+BEGIN_SRC emacs-lisp
